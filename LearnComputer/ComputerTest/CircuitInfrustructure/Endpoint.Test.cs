@@ -144,6 +144,27 @@ namespace ComputerTest.CircuitInfrustructure
         }
 
         [TestMethod]
+        public void InputEndpointRecordLastReceivedSignal()
+        {
+            InputEndpoint input1 = new InputEndpoint();
+            Byte receivedSignal = 0;
+            input1.Receive += (sender, signal) =>
+            {
+                receivedSignal = signal;
+            };
+            input1.Transmit(1);
+            Assert.AreEqual(input1.LastReceivedSignal, 1);
+            input1.Transmit(0);
+            Assert.AreEqual(input1.LastReceivedSignal, 0);
+
+            InputEndpoint input2 = new InputEndpoint();
+            input2.Transmit(1);
+            Assert.AreEqual(input2.LastReceivedSignal, 1);
+            input2.Transmit(0);
+            Assert.AreEqual(input2.LastReceivedSignal, 0);
+        }
+
+        [TestMethod]
         public void NeutralEndpointTransimit()
         {
             NeutralEndpoint newtral = new NeutralEndpoint();
@@ -162,6 +183,27 @@ namespace ComputerTest.CircuitInfrustructure
         {
             NeutralEndpoint neutral = new NeutralEndpoint();
             neutral.Transmit(1);
+        }
+
+        [TestMethod]
+        public void NeutralEndpointRecordLastReceivedSignal()
+        {
+            NeutralEndpoint neutral1 = new NeutralEndpoint();
+            Byte receivedSignal = 0;
+            neutral1.Receive += (sender, signal) =>
+            {
+                receivedSignal = signal;
+            };
+            neutral1.Transmit(1);
+            Assert.AreEqual(neutral1.LastReceivedSignal, 1);
+            neutral1.Transmit(0);
+            Assert.AreEqual(neutral1.LastReceivedSignal, 0);
+
+            NeutralEndpoint neutral2 = new NeutralEndpoint();
+            neutral2.Transmit(1);
+            Assert.AreEqual(neutral2.LastReceivedSignal, 1);
+            neutral2.Transmit(0);
+            Assert.AreEqual(neutral2.LastReceivedSignal, 0);
         }
 
         [TestMethod]

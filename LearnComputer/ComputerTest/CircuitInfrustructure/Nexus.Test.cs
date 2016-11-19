@@ -75,6 +75,9 @@ namespace ComputerTest.CircuitInfrustructure
             Assert.AreEqual(inputSignal, 1);
             Assert.AreEqual(netrualSignal, 1);
             output2.Produce(0);
+            Assert.AreEqual(inputSignal, 1);
+            Assert.AreEqual(netrualSignal, 1);
+            output1.Produce(0);
             Assert.AreEqual(inputSignal, 0);
             Assert.AreEqual(netrualSignal, 0);
             netrual.Produce(1);
@@ -101,8 +104,6 @@ namespace ComputerTest.CircuitInfrustructure
             Assert.AreEqual(inputSignal2, 0);
 
             nexus.ConnectAt(input2, 3);
-
-            output.Produce(1);
             Assert.AreEqual(inputSignal1, 1);
             Assert.AreEqual(inputSignal2, 1);
         }
