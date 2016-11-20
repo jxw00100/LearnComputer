@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="CircuitInfrustructure\Endpoint.Test.cs" />
     <Compile Include="CircuitInfrustructure\Nexus.Test.cs" />
+    <Compile Include="CircuitInfrustructure\SimpleCircuits.Test.cs" />
     <Compile Include="CircuitInfrustructure\Wire.Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -39,13 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CircuitInfrustructure\CrossNexus.cs" />
     <Compile Include="CircuitInfrustructure\Endpoint.cs" />
     <Compile Include="CircuitInfrustructure\IInputEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\IndicatorLight.cs" />
     <Compile Include="CircuitInfrustructure\InputEndpoint.cs" />
     <Compile Include="CircuitInfrustructure\IOutputEndpoint.cs" />
     <Compile Include="CircuitInfrustructure\NeutralEndpoint.cs" />
     <Compile Include="CircuitInfrustructure\Nexus.cs" />
     <Compile Include="CircuitInfrustructure\OutputEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\PowerSupplier.cs" />
+    <Compile Include="CircuitInfrustructure\TShapedNexus.cs" />
     <Compile Include="CircuitInfrustructure\Wire.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

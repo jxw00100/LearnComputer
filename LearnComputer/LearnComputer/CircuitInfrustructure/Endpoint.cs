@@ -23,7 +23,7 @@ namespace LearnComputer.CircuitInfrustructure
             }
         }
 
-        public void DisconnectEndpoint()
+        public virtual void DisconnectEndpoint()
         {
             if (ConnectedPoint != null)
             {

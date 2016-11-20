@@ -107,5 +107,6 @@ namespace ComputerTest.CircuitInfrustructure
             Assert.AreEqual(inputSignal1, 1);
             Assert.AreEqual(inputSignal2, 1);
         }
+        
     }
 }

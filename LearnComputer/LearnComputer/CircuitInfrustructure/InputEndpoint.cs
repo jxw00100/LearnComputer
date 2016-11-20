@@ -22,5 +22,11 @@ namespace LearnComputer.CircuitInfrustructure
             LastReceivedSignal = signal;
             Receive(ConnectedPoint, signal);
         }
+
+        public void DisconnectEndpoint()
+        {
+            base.DisconnectEndpoint();
+            Transmit(0);
+        }
     }
 }
