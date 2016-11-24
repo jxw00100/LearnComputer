@@ -51,6 +51,7 @@
     <Compile Include="CircuitInfrustructure\Basic\PowerSupplier.cs" />
     <Compile Include="CircuitInfrustructure\Basic\TShapedNexus.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Wire.cs" />
+    <Compile Include="CircuitInfrustructure\Element\ANDGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\Delayer.cs" />
     <Compile Include="CircuitInfrustructure\Element\Invertor.cs" />
     <Compile Include="CircuitInfrustructure\Element\Relay.cs" />
