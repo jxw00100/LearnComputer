@@ -13,6 +13,8 @@ namespace LearnComputer.CircuitInfrustructure
 
         public Relay(Int32 delayMilliseconds = 0, Boolean invert = false)
         {
+            if (delayMilliseconds < 0) throw new ArgumentException("Delay time must be larger than or equal to 0");
+
             _deplayMilliseconds = delayMilliseconds;
             _invertBit = (Byte)(invert ? 1 : 0);
             Input = new InputEndpoint();

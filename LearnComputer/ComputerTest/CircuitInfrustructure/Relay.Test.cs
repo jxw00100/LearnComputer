@@ -81,6 +81,13 @@ namespace ComputerTest.CircuitInfrustructure
             var deltaMilliseconds = Math.Abs(timer.ElapsedMilliseconds - delayMilliseconds);
             Assert.IsTrue(deltaMilliseconds <= 1);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Delay time must be larger than or equal to 0")]
+        public void RelayDelayWithInvalidTime()
+        {
+            Relay relay = new Relay(delayMilliseconds: -1);
+        }
         #endregion
 
         #region delayer test
@@ -143,6 +150,20 @@ namespace ComputerTest.CircuitInfrustructure
             var deltaMilliseconds = Math.Abs(timer.ElapsedMilliseconds - delayMilliseconds);
             Assert.IsTrue(deltaMilliseconds <= 1);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Delay time must be larger than 0")]
+        public void DelayerDelayWith0Millisecond()
+        {
+            Delayer delayer = new Delayer(0);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Delay time must be larger than 0")]
+        public void DelayerDelayWithNegativeMilliseconds()
+        {
+            Delayer delayer = new Delayer(-10);
+        }
         #endregion
 
         #region invertor test
@@ -176,7 +197,6 @@ namespace ComputerTest.CircuitInfrustructure
 
             Assert.IsTrue(light.Lighting);
         }
-        
         #endregion
     }
 }
