@@ -27,7 +27,7 @@ namespace LearnComputer.CircuitInfrustructure
             _endpoints[1].ConnectTo(point2);
         }
 
-        private void SignalReceivedHandler(Endpoint sender, Byte signal)
+        private void SignalReceivedHandler(Endpoint sender, Int32 signal)
         {
             if (Object.ReferenceEquals(sender, _endpoints[0].ConnectedPoint))
             {

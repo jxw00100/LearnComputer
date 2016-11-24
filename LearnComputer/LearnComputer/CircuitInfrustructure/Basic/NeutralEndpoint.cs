@@ -11,9 +11,9 @@ namespace LearnComputer.CircuitInfrustructure
             : base(connectTo)
         {}
 
-        public byte LastSentSignal { get; private set; }
+        public Int32 LastSentSignal { get; private set; }
 
-        public void Produce(Byte signal)
+        public void Produce(Int32 signal)
         {
             if (signal != 0 && signal != 1)
                 throw new ArgumentException(String.Format(INVALID_SIGNAL_EXCEPTION_FORMAT, signal));

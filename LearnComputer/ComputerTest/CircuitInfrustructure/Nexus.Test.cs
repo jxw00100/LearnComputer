@@ -61,12 +61,12 @@ namespace ComputerTest.CircuitInfrustructure
         public void SendSignal()
         {
             InputEndpoint input = new InputEndpoint();
-            Byte inputSignal = 0;
+            Int32 inputSignal = 0;
             input.Receive += (sender, signal) => { inputSignal = signal; };
             OutputEndpoint output1 = new OutputEndpoint();
             OutputEndpoint output2 = new OutputEndpoint();
             NeutralEndpoint netrual = new NeutralEndpoint();
-            Byte netrualSignal = 0;
+            Int32 netrualSignal = 0;
             netrual.Receive += (sender, signal) => { netrualSignal = signal; };
 
             Nexus nexus = new Nexus(6, input, output1, output2, netrual);
@@ -89,10 +89,10 @@ namespace ComputerTest.CircuitInfrustructure
         public void ConnectPostCreating()
         {
             InputEndpoint input1 = new InputEndpoint();
-            Byte inputSignal1 = 0;
+            Int32 inputSignal1 = 0;
             input1.Receive += (sender, signal) => { inputSignal1 = signal; };
             InputEndpoint input2 = new InputEndpoint();
-            Byte inputSignal2 = 0;
+            Int32 inputSignal2 = 0;
             input2.Receive += (sender, signal) => { inputSignal2 = signal; };
             OutputEndpoint output = new OutputEndpoint();
             NeutralEndpoint netrual = new NeutralEndpoint();

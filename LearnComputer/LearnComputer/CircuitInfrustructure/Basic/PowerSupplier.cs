@@ -16,7 +16,7 @@ namespace LearnComputer.CircuitInfrustructure
         public void Toggle()
         {
             _switchOn = !_switchOn;
-            Output.Produce((Byte)(_switchOn ? 1 : 0));
+            Output.Produce(Convert.ToInt32(_switchOn));
         }
 
         public void On()

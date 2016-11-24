@@ -21,7 +21,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void SendSignal()
         {
             InputEndpoint input = new InputEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             Endpoint senderPoint = null;
             input.Receive += (sdr, signal) =>
             {
@@ -43,7 +43,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void SendSignalBackAndForth()
         {
             NeutralEndpoint nuetral1 = new NeutralEndpoint();
-            Byte receivedSignal1 = 0;
+            Int32 receivedSignal1 = 0;
             Endpoint senderPoint1 = null;
             nuetral1.Receive += (sdr, signal) =>
             {
@@ -52,7 +52,7 @@ namespace ComputerTest.CircuitInfrustructure
             };
 
             NeutralEndpoint nuetral2 = new NeutralEndpoint();
-            Byte receivedSignal2 = 0;
+            Int32 receivedSignal2 = 0;
             Endpoint senderPoint2 = null;
             nuetral2.Receive += (sdr, signal) =>
             {
@@ -75,7 +75,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void ConnectLater()
         {
             InputEndpoint input = new InputEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             Endpoint senderPoint = null;
             input.Receive += (sdr, signal) =>
             {

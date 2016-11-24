@@ -4,7 +4,7 @@ namespace LearnComputer.CircuitInfrustructure
 {
     public interface IInputEndpoint
     {
-        Byte LastReceivedSignal { get; }
-        void Transmit(byte signal);
+        Int32 LastReceivedSignal { get; }
+        void Transmit(Int32 signal);
     }
 }

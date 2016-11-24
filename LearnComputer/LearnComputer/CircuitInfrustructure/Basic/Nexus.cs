@@ -8,10 +8,10 @@ namespace LearnComputer.CircuitInfrustructure
     {
         private const string DUPLICATE_ENDPOINTS_EXCETION = "Unable to connect 2 same endpoints.";
         private NeutralEndpoint[] _endpoints;
-        private Dictionary<NeutralEndpoint, Byte> _inputStatus = new Dictionary<NeutralEndpoint, Byte>();
-        private Dictionary<NeutralEndpoint, Byte> _outputStatus = new Dictionary<NeutralEndpoint, Byte>();
+        private Dictionary<NeutralEndpoint, Int32> _inputStatus = new Dictionary<NeutralEndpoint, Int32>();
+        private Dictionary<NeutralEndpoint, Int32> _outputStatus = new Dictionary<NeutralEndpoint, Int32>();
 
-        public Byte LastSignalStatus
+        public Int32 LastSignalStatus
         {
             get
             {
@@ -20,7 +20,7 @@ namespace LearnComputer.CircuitInfrustructure
                 {
                     preSignal = points.LastReceivedSignal | preSignal;
                 }
-                return (Byte)preSignal;
+                return preSignal;
             }
         }
 
@@ -62,11 +62,11 @@ namespace LearnComputer.CircuitInfrustructure
             endpoint.Produce(LastSignalStatus);
         }
 
-        private void SignalReceivedHandler(Endpoint sender, Byte signal)
+        private void SignalReceivedHandler(Endpoint sender, Int32 signal)
         {
             if (LastSignalStatusExcludeThisSender(sender) == 0)
             {
-                Byte previousSignal = _inputStatus[(NeutralEndpoint) sender.ConnectedPoint];
+                Int32 previousSignal = _inputStatus[(NeutralEndpoint)sender.ConnectedPoint];
                 if (previousSignal != signal)
                 {
                     foreach (NeutralEndpoint points in _endpoints)
@@ -81,7 +81,7 @@ namespace LearnComputer.CircuitInfrustructure
             }
         }
 
-        private Byte LastSignalStatusExcludeThisSender(Endpoint sender)
+        private Int32 LastSignalStatusExcludeThisSender(Endpoint sender)
         {
             Int32 preSignal = 0;
             foreach (NeutralEndpoint points in _endpoints)
@@ -91,7 +91,7 @@ namespace LearnComputer.CircuitInfrustructure
                     preSignal = points.LastReceivedSignal | preSignal;
                 }
             }
-            return (Byte)preSignal;
+            return preSignal;
         }
 
         private Boolean SenderIsFromOutside(Endpoint sender)

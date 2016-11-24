@@ -97,7 +97,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void DisconnectEndpointWithPrechargedSignal()
         {
             InputEndpoint input = new InputEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             input.Receive += (sender, signal) =>
             {
                 receivedSignal = signal;
@@ -115,13 +115,13 @@ namespace ComputerTest.CircuitInfrustructure
         public void ChangeEndpointMidwayWithPrechargedSignal()
         {
             InputEndpoint input1 = new InputEndpoint();
-            Byte receivedSignal1 = 0;
+            Int32 receivedSignal1 = 0;
             input1.Receive += (sender, signal) =>
             {
                 receivedSignal1 = signal;
             };
             InputEndpoint input2 = new InputEndpoint();
-            Byte receivedSignal2 = 0;
+            Int32 receivedSignal2 = 0;
             input2.Receive += (sender, signal) =>
             {
                 receivedSignal2 = signal;
@@ -170,7 +170,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void InputEndpointTransimit()
         {
             InputEndpoint input1 = new InputEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             input1.Receive += (sender, signal) =>
             {
                 receivedSignal = signal;
@@ -191,7 +191,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void InputEndpointRecordLastReceivedSignal()
         {
             InputEndpoint input1 = new InputEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             input1.Receive += (sender, signal) =>
             {
                 receivedSignal = signal;
@@ -212,7 +212,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void NeutralEndpointTransimit()
         {
             NeutralEndpoint newtral = new NeutralEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             newtral.Receive += (sender, signal) =>
             {
                 receivedSignal = signal;
@@ -233,7 +233,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void NeutralEndpointRecordLastReceivedSignal()
         {
             NeutralEndpoint neutral1 = new NeutralEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             neutral1.Receive += (sender, signal) =>
             {
                 receivedSignal = signal;
@@ -261,7 +261,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void OutputEndpointProduceToInput()
         {
             InputEndpoint input = new InputEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             input.Receive += (sender, signal) =>
             {
                 receivedSignal = signal;
@@ -276,7 +276,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void OutputEndpointProduceToNeutral()
         {
             NeutralEndpoint neutral = new NeutralEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             neutral.Receive += (sender, signal) =>
             {
                 receivedSignal = signal;
@@ -299,7 +299,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void NeutralEndpointProduceToNeutral()
         {
             NeutralEndpoint neutral1 = new NeutralEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             neutral1.Receive += (sender, signal) =>
             {
                 receivedSignal = signal;
@@ -314,7 +314,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void NeutralEndpointProduceToInput()
         {
             InputEndpoint input = new InputEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             input.Receive += (sender, signal) =>
             {
                 receivedSignal = signal;
@@ -337,7 +337,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void ContinuousSendSignals()
         {
             InputEndpoint input = new InputEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             input.Receive += (sender, signal) =>
             {
                 receivedSignal = signal;
@@ -364,13 +364,13 @@ namespace ComputerTest.CircuitInfrustructure
         public void ChargeTheOutputThenConnectInputOrNuetral()
         {
             InputEndpoint input = new InputEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             input.Receive += (sender, signal) =>
             {
                 receivedSignal = signal;
             };
             NeutralEndpoint neutral = new NeutralEndpoint();
-            Byte neutralReceivedSignal = 0;
+            Int32 neutralReceivedSignal = 0;
             neutral.Receive += (sender, signal) =>
             {
                 neutralReceivedSignal = signal;
@@ -394,13 +394,13 @@ namespace ComputerTest.CircuitInfrustructure
         public void ChargeTheNeutralThenConnectInputOrNuetral()
         {
             InputEndpoint input = new InputEndpoint();
-            Byte receivedSignal = 0;
+            Int32 receivedSignal = 0;
             input.Receive += (sender, signal) =>
             {
                 receivedSignal = signal;
             };
             NeutralEndpoint neutral = new NeutralEndpoint();
-            Byte neutralReceivedSignal = 0;
+            Int32 neutralReceivedSignal = 0;
             neutral.Receive += (sender, signal) =>
             {
                 neutralReceivedSignal = signal;

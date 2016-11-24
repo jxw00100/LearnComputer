@@ -17,9 +17,9 @@ namespace LearnComputer.CircuitInfrustructure
             Lighting = false;
         }
 
-        public void ReceivedSignal(Endpoint sender, Byte signal)
+        public void ReceivedSignal(Endpoint sender, Int32 signal)
         {
-            Lighting = (signal == 1) ? true : false;
+            Lighting = Convert.ToBoolean(signal);
         }
     }
 }
