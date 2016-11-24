@@ -23,7 +23,7 @@ namespace LearnComputer.CircuitInfrustructure
             Receive(ConnectedPoint, signal);
         }
 
-        public void DisconnectEndpoint()
+        public override void DisconnectEndpoint()
         {
             base.DisconnectEndpoint();
             Transmit(0);

@@ -2,12 +2,12 @@
 
 namespace LearnComputer.CircuitInfrustructure
 {
-    public class NeutralEndpoint: InputEndpoint, IOutputEndpoint
+    public class OutputEndpoint: Endpoint, IOutputEndpoint
     {
-        public NeutralEndpoint():base(null)
+        public OutputEndpoint():base(null)
         {}
 
-        public NeutralEndpoint(Endpoint connectTo)
+        public OutputEndpoint(Endpoint connectTo)
             : base(connectTo)
         {}
 
@@ -19,11 +19,17 @@ namespace LearnComputer.CircuitInfrustructure
                 throw new ArgumentException(String.Format(INVALID_SIGNAL_EXCEPTION_FORMAT, signal));
             LastSentSignal = signal;
 
-            var connectedPoint = ConnectedPoint as InputEndpoint;
+            var connectedPoint = ConnectedPoint as IInputEndpoint;
             if (connectedPoint != null)
             {
                 connectedPoint.Transmit(signal);
             }
+        }
+
+        public override void ConnectTo(Endpoint point)
+        {
+            base.ConnectTo(point);
+            Produce(LastSentSignal);
         }
     }
 }

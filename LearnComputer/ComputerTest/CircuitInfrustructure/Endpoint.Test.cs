@@ -94,6 +94,50 @@ namespace ComputerTest.CircuitInfrustructure
         }
 
         [TestMethod]
+        public void DisconnectEndpointWithPrechargedSignal()
+        {
+            InputEndpoint input = new InputEndpoint();
+            Byte receivedSignal = 0;
+            input.Receive += (sender, signal) =>
+            {
+                receivedSignal = signal;
+            };
+            OutputEndpoint output = new OutputEndpoint(input);
+
+            output.Produce(1);
+            Assert.AreEqual(receivedSignal, 1);
+
+            output.DisconnectEndpoint();
+            Assert.AreEqual(receivedSignal, 0);
+        }
+
+        [TestMethod]
+        public void ChangeEndpointMidwayWithPrechargedSignal()
+        {
+            InputEndpoint input1 = new InputEndpoint();
+            Byte receivedSignal1 = 0;
+            input1.Receive += (sender, signal) =>
+            {
+                receivedSignal1 = signal;
+            };
+            InputEndpoint input2 = new InputEndpoint();
+            Byte receivedSignal2 = 0;
+            input2.Receive += (sender, signal) =>
+            {
+                receivedSignal2 = signal;
+            };
+            OutputEndpoint output = new OutputEndpoint(input1);
+
+            output.Produce(1);
+            Assert.AreEqual(receivedSignal1, 1);
+            Assert.AreEqual(receivedSignal2, 0);
+
+            output.ConnectTo(input2);
+            Assert.AreEqual(receivedSignal1, 0);
+            Assert.AreEqual(receivedSignal2, 1);
+        }
+
+        [TestMethod]
         public void Reconnect()
         {
             InputEndpoint input1 = new InputEndpoint();
@@ -317,7 +361,92 @@ namespace ComputerTest.CircuitInfrustructure
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException),"Signal value can only be either 0 or 1. 2 is not a valid value.")]
+        public void ChargeTheOutputThenConnectInputOrNuetral()
+        {
+            InputEndpoint input = new InputEndpoint();
+            Byte receivedSignal = 0;
+            input.Receive += (sender, signal) =>
+            {
+                receivedSignal = signal;
+            };
+            NeutralEndpoint neutral = new NeutralEndpoint();
+            Byte neutralReceivedSignal = 0;
+            neutral.Receive += (sender, signal) =>
+            {
+                neutralReceivedSignal = signal;
+            };
+            OutputEndpoint output = new OutputEndpoint();
+
+            output.Produce(1);
+            Assert.AreEqual(receivedSignal, 0);
+            Assert.AreEqual(neutralReceivedSignal, 0);
+
+            output.ConnectTo(input);
+            Assert.AreEqual(receivedSignal, 1);
+            Assert.AreEqual(neutralReceivedSignal, 0);
+
+            output.ConnectTo(neutral);
+            Assert.AreEqual(receivedSignal, 0);
+            Assert.AreEqual(neutralReceivedSignal, 1);
+        }
+
+        [TestMethod]
+        public void ChargeTheNeutralThenConnectInputOrNuetral()
+        {
+            InputEndpoint input = new InputEndpoint();
+            Byte receivedSignal = 0;
+            input.Receive += (sender, signal) =>
+            {
+                receivedSignal = signal;
+            };
+            NeutralEndpoint neutral = new NeutralEndpoint();
+            Byte neutralReceivedSignal = 0;
+            neutral.Receive += (sender, signal) =>
+            {
+                neutralReceivedSignal = signal;
+            };
+            NeutralEndpoint neutralOut = new NeutralEndpoint();
+
+            neutralOut.Produce(1);
+            Assert.AreEqual(receivedSignal, 0);
+            Assert.AreEqual(neutralReceivedSignal, 0);
+
+            neutralOut.ConnectTo(input);
+            Assert.AreEqual(receivedSignal, 1);
+            Assert.AreEqual(neutralReceivedSignal, 0);
+
+            neutralOut.ConnectTo(neutral);
+            Assert.AreEqual(receivedSignal, 0);
+            Assert.AreEqual(neutralReceivedSignal, 1);
+        }
+
+        #region Exceptions Test
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Endpoint cannot connect to itself.")]
+        public void InputEndpointConnectToSelf()
+        {
+            InputEndpoint point = new InputEndpoint();
+            point.ConnectTo(point);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Endpoint cannot connect to itself.")]
+        public void OutputEndpointConnectToSelf()
+        {
+            OutputEndpoint point = new OutputEndpoint();
+            point.ConnectTo(point);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Endpoint cannot connect to itself.")]
+        public void NeutralEndpointConnectToSelf()
+        {
+            NeutralEndpoint point = new NeutralEndpoint();
+            point.ConnectTo(point);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Signal value can only be either 0 or 1. 2 is not a valid value.")]
         public void InputTransmitInvalidSignal2()
         {
             InputEndpoint input1 = new InputEndpoint();
@@ -379,5 +508,7 @@ namespace ComputerTest.CircuitInfrustructure
             OutputEndpoint output = new OutputEndpoint();
             output.Produce(255);
         }
+        #endregion
+        
     }
 }

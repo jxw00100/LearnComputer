@@ -29,9 +29,6 @@ namespace ComputerTest.CircuitInfrustructure
             Assert.IsFalse(light.Lighting);
         }
 
-
-
-
         [TestMethod]
         public void PowerWireLight()
         {
@@ -66,7 +63,6 @@ namespace ComputerTest.CircuitInfrustructure
             Assert.IsFalse(light.Lighting);
             power.On();
             Assert.IsFalse(light.Lighting);
-
         }
     }
 }

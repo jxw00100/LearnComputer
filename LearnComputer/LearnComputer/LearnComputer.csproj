@@ -39,20 +39,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CircuitInfrustructure\CrossNexus.cs" />
-    <Compile Include="CircuitInfrustructure\Endpoint.cs" />
-    <Compile Include="CircuitInfrustructure\IInputEndpoint.cs" />
-    <Compile Include="CircuitInfrustructure\IndicatorLight.cs" />
-    <Compile Include="CircuitInfrustructure\InputEndpoint.cs" />
-    <Compile Include="CircuitInfrustructure\IOutputEndpoint.cs" />
-    <Compile Include="CircuitInfrustructure\NeutralEndpoint.cs" />
-    <Compile Include="CircuitInfrustructure\Nexus.cs" />
-    <Compile Include="CircuitInfrustructure\OutputEndpoint.cs" />
-    <Compile Include="CircuitInfrustructure\PowerSupplier.cs" />
-    <Compile Include="CircuitInfrustructure\TShapedNexus.cs" />
-    <Compile Include="CircuitInfrustructure\Wire.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\CrossNexus.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\Endpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\IInputEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\IndicatorLight.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\InputEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\IOutputEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\NeutralEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\Nexus.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\OutputEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\PowerSupplier.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\TShapedNexus.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\Wire.cs" />
+    <Compile Include="CircuitInfrustructure\Element\Delayer.cs" />
+    <Compile Include="CircuitInfrustructure\Element\Invertor.cs" />
+    <Compile Include="CircuitInfrustructure\Element\Relay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -13,8 +13,10 @@ namespace LearnComputer.CircuitInfrustructure
             ConnectTo(connectTo);
         }
 
-        public void ConnectTo(Endpoint point)
+        public virtual void ConnectTo(Endpoint point)
         {
+            if (Object.ReferenceEquals(this, ConnectedPoint)) throw new ArgumentException("Endpoint cannot connect to itself.");
+
             if (point != null && !Object.ReferenceEquals(point, ConnectedPoint))
             {
                 if (ConnectedPoint != null) ConnectedPoint.DisconnectEndpoint();
