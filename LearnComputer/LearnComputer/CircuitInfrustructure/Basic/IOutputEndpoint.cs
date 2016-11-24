@@ -2,7 +2,7 @@
 
 namespace LearnComputer.CircuitInfrustructure
 {
-    public interface IOutputEndpoint
+    public interface IOutputEndpoint : IEndpoint
     {
         Int32 LastSentSignal { get; }
         void Produce(Int32 signal);

@@ -4,7 +4,7 @@ namespace LearnComputer.CircuitInfrustructure
 {
     public class PowerSupplier
     {
-        public OutputEndpoint Output { get; private set; }
+        public IOutputEndpoint Output { get; private set; }
         private Boolean _switchOn = false;
 
         public PowerSupplier()

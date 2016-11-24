@@ -24,13 +24,13 @@ namespace LearnComputer.CircuitInfrustructure
             }
         }
 
-        public Nexus(Int32 endpointCount, params Endpoint[] connectedPoints)
+        public Nexus(Int32 endpointCount, params IEndpoint[] connectedPoints)
         {
             _endpoints = new NeutralEndpoint[endpointCount];
             InitializeEndpoints(connectedPoints);
         }
 
-        private void InitializeEndpoints(Endpoint[] connectedPoints)
+        private void InitializeEndpoints(IEndpoint[] connectedPoints)
         {
             for (var i = 0; i < _endpoints.Length; i++)
             {
@@ -54,7 +54,7 @@ namespace LearnComputer.CircuitInfrustructure
             return _endpoints.Length;
         }
 
-        public void ConnectAt(Endpoint connectedPoint, Int32 atIndex)
+        public void ConnectAt(IEndpoint connectedPoint, Int32 atIndex)
         {
             NeutralEndpoint endpoint = _endpoints[atIndex];
             _inputStatus[endpoint] = 0;
@@ -62,7 +62,7 @@ namespace LearnComputer.CircuitInfrustructure
             endpoint.Produce(LastSignalStatus);
         }
 
-        private void SignalReceivedHandler(Endpoint sender, Int32 signal)
+        private void SignalReceivedHandler(IEndpoint sender, Int32 signal)
         {
             if (LastSignalStatusExcludeThisSender(sender) == 0)
             {
@@ -81,7 +81,7 @@ namespace LearnComputer.CircuitInfrustructure
             }
         }
 
-        private Int32 LastSignalStatusExcludeThisSender(Endpoint sender)
+        private Int32 LastSignalStatusExcludeThisSender(IEndpoint sender)
         {
             Int32 preSignal = 0;
             foreach (NeutralEndpoint points in _endpoints)
@@ -94,9 +94,10 @@ namespace LearnComputer.CircuitInfrustructure
             return preSignal;
         }
 
-        private Boolean SenderIsFromOutside(Endpoint sender)
+        public INeutralEndpoint GetEndpointAt(Int32 index)
         {
-            return _endpoints.All((point) => !Object.ReferenceEquals(point, sender));
-;       }
+            if(index <0 || index >= _endpoints.Length) throw new ArgumentException("Index out of the endpoints bound");
+            return _endpoints[index];
+        }
     }
 }

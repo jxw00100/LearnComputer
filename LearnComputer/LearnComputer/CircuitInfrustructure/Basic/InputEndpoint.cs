@@ -4,15 +4,13 @@ namespace LearnComputer.CircuitInfrustructure
 {
     public class InputEndpoint: Endpoint, IInputEndpoint
     {
-        public delegate void ReceiveSignalHanlder(Endpoint sender, Int32 signal);
-
         public event ReceiveSignalHanlder Receive = (sender, signal) => { };
         public Int32 LastReceivedSignal { get; private set; }
 
         public InputEndpoint():base(null)
         {}
 
-        public InputEndpoint(Endpoint connectTo):base(connectTo)
+        public InputEndpoint(IEndpoint connectTo):base(connectTo)
         {}
 
         public void Transmit(Int32 signal)
@@ -29,4 +27,6 @@ namespace LearnComputer.CircuitInfrustructure
             Transmit(0);
         }
     }
+
+    
 }

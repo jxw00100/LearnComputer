@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Runtime.Remoting.Channels;
-using System.Security.Cryptography.X509Certificates;
 using LearnComputer.CircuitInfrustructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -171,7 +169,7 @@ namespace ComputerTest.CircuitInfrustructure
             Int32 delayMilliseconds = 5;
             PowerSupplier power = new PowerSupplier();
             Delayer delayer = new Delayer(delayMilliseconds);
-            InputEndpoint input = new InputEndpoint();
+            IInputEndpoint input = new InputEndpoint();
             Stopwatch timer = new Stopwatch();
             input.Receive += (s, sg) => { if (sg == 1) timer.Stop(); };
 
@@ -191,7 +189,7 @@ namespace ComputerTest.CircuitInfrustructure
             Int32 delayMilliseconds = 999;
             PowerSupplier power = new PowerSupplier();
             Delayer delayer = new Delayer(delayMilliseconds);
-            InputEndpoint input = new InputEndpoint();
+            IInputEndpoint input = new InputEndpoint();
             Stopwatch timer = new Stopwatch();
             input.Receive += (s, sg) => { if (sg == 1) timer.Stop(); };
 

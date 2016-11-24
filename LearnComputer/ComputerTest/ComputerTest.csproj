@@ -50,6 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CircuitInfrustructure\ORGate.Test.cs" />
+    <Compile Include="CircuitInfrustructure\ANDGate.Test.cs" />
     <Compile Include="CircuitInfrustructure\Endpoint.Test.cs" />
     <Compile Include="CircuitInfrustructure\Nexus.Test.cs" />
     <Compile Include="CircuitInfrustructure\Relay.Test.cs" />

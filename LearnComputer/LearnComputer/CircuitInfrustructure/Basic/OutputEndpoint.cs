@@ -7,7 +7,7 @@ namespace LearnComputer.CircuitInfrustructure
         public OutputEndpoint():base(null)
         {}
 
-        public OutputEndpoint(Endpoint connectTo)
+        public OutputEndpoint(IEndpoint connectTo)
             : base(connectTo)
         {}
 
@@ -26,7 +26,7 @@ namespace LearnComputer.CircuitInfrustructure
             }
         }
 
-        public override void ConnectTo(Endpoint point)
+        public override void ConnectTo(IEndpoint point)
         {
             base.ConnectTo(point);
             Produce(LastSentSignal);

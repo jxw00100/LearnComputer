@@ -10,8 +10,8 @@ namespace ComputerTest.CircuitInfrustructure
         [TestMethod]
         public void CreateNew()
         {
-            InputEndpoint input = new InputEndpoint();
-            OutputEndpoint output = new OutputEndpoint();
+            IInputEndpoint input = new InputEndpoint();
+            IOutputEndpoint output = new OutputEndpoint();
             Wire wire = new Wire(input, output);
 
             Assert.IsNotNull(wire);
@@ -20,16 +20,16 @@ namespace ComputerTest.CircuitInfrustructure
         [TestMethod]
         public void SendSignal()
         {
-            InputEndpoint input = new InputEndpoint();
+            IInputEndpoint input = new InputEndpoint();
             Int32 receivedSignal = 0;
-            Endpoint senderPoint = null;
+            IEndpoint senderPoint = null;
             input.Receive += (sdr, signal) =>
             {
                 senderPoint = sdr;
                 receivedSignal = signal;
             };
 
-            OutputEndpoint output = new OutputEndpoint();
+            IOutputEndpoint output = new OutputEndpoint();
             Wire wire = new Wire(input, output);
 
             output.Produce(1);
@@ -42,18 +42,18 @@ namespace ComputerTest.CircuitInfrustructure
         [TestMethod]
         public void SendSignalBackAndForth()
         {
-            NeutralEndpoint nuetral1 = new NeutralEndpoint();
+            INeutralEndpoint nuetral1 = new NeutralEndpoint();
             Int32 receivedSignal1 = 0;
-            Endpoint senderPoint1 = null;
+            IEndpoint senderPoint1 = null;
             nuetral1.Receive += (sdr, signal) =>
             {
                 senderPoint1 = sdr;
                 receivedSignal1 = signal;
             };
 
-            NeutralEndpoint nuetral2 = new NeutralEndpoint();
+            INeutralEndpoint nuetral2 = new NeutralEndpoint();
             Int32 receivedSignal2 = 0;
-            Endpoint senderPoint2 = null;
+            IEndpoint senderPoint2 = null;
             nuetral2.Receive += (sdr, signal) =>
             {
                 senderPoint2 = sdr;
@@ -74,16 +74,16 @@ namespace ComputerTest.CircuitInfrustructure
         [TestMethod]
         public void ConnectLater()
         {
-            InputEndpoint input = new InputEndpoint();
+            IInputEndpoint input = new InputEndpoint();
             Int32 receivedSignal = 0;
-            Endpoint senderPoint = null;
+            IEndpoint senderPoint = null;
             input.Receive += (sdr, signal) =>
             {
                 senderPoint = sdr;
                 receivedSignal = signal;
             };
 
-            OutputEndpoint output = new OutputEndpoint();
+            IOutputEndpoint output = new OutputEndpoint();
 
             Wire wire = new Wire();
             wire.Connect(input, output);
@@ -101,7 +101,7 @@ namespace ComputerTest.CircuitInfrustructure
             Wire wire1 = new Wire();
             Wire wire2 = new Wire(null, null);
 
-            InputEndpoint input = new InputEndpoint();
+            IInputEndpoint input = new InputEndpoint();
             Wire wire3 = new Wire(input);
             Wire wire4 = new Wire(input, null);
             Wire wire5 = new Wire(null, input);
@@ -122,7 +122,7 @@ namespace ComputerTest.CircuitInfrustructure
             "Unable to connect 2 same endpoints.")]
         public void CreateNewWireWithSamePoint()
         {
-            InputEndpoint input = new InputEndpoint();
+            IInputEndpoint input = new InputEndpoint();
             Wire wire = new Wire(input, input);
         }
 
@@ -131,8 +131,8 @@ namespace ComputerTest.CircuitInfrustructure
             "Unable to connect 2 same endpoints.")]
         public void ConnectSamePoint()
         {
-            InputEndpoint input1 = new InputEndpoint();
-            InputEndpoint input2 = new InputEndpoint();
+            IInputEndpoint input1 = new InputEndpoint();
+            IInputEndpoint input2 = new InputEndpoint();
             Wire wire = new Wire(input1, input2);
             wire.Connect(input1, input1);
         }
