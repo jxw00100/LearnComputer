@@ -52,6 +52,33 @@ namespace ComputerTest.CircuitInfrustructure
         }
 
         [TestMethod]
+        public void RelayWithContactInput()
+        {
+            PowerSupplier power1 = new PowerSupplier();
+            PowerSupplier power2 = new PowerSupplier();
+            IndicatorLight light = new IndicatorLight();
+            Relay relay = new Relay();
+
+            relay.Input.ConnectTo(power1.Output);
+            relay.InputOfContact.ConnectTo(power2.Output);
+            relay.Output.ConnectTo(light.Input);
+
+            Assert.IsFalse(light.Lighting);
+            power1.On();
+            power2.Off();
+            Assert.IsFalse(light.Lighting);
+            power1.On();
+            power2.On();
+            Assert.IsTrue(light.Lighting);
+            power1.Off();
+            power2.On();
+            Assert.IsFalse(light.Lighting);
+            power1.Off();
+            power2.Off();
+            Assert.IsFalse(light.Lighting);
+        }
+
+        [TestMethod]
         public void InvertRelayNotConnectToPower()
         {
             IndicatorLight light = new IndicatorLight();
@@ -60,6 +87,33 @@ namespace ComputerTest.CircuitInfrustructure
             relay.Output.ConnectTo(light.Input);
 
             Assert.IsTrue(light.Lighting);
+        }
+
+        [TestMethod]
+        public void InvertRelayWithContactInput()
+        {
+            PowerSupplier power1 = new PowerSupplier();
+            PowerSupplier power2 = new PowerSupplier();
+            IndicatorLight light = new IndicatorLight();
+            Relay relay = new Relay(invert:true);
+
+            relay.Input.ConnectTo(power1.Output);
+            relay.InputOfContact.ConnectTo(power2.Output);
+            relay.Output.ConnectTo(light.Input);
+
+            Assert.IsFalse(light.Lighting);
+            power1.On();
+            power2.Off();
+            Assert.IsFalse(light.Lighting);
+            power1.On();
+            power2.On();
+            Assert.IsFalse(light.Lighting);
+            power1.Off();
+            power2.On();
+            Assert.IsTrue(light.Lighting);
+            power1.Off();
+            power2.Off();
+            Assert.IsFalse(light.Lighting);
         }
 
         [TestMethod]
@@ -148,7 +202,7 @@ namespace ComputerTest.CircuitInfrustructure
             power.On();
 
             var deltaMilliseconds = Math.Abs(timer.ElapsedMilliseconds - delayMilliseconds);
-            Assert.IsTrue(deltaMilliseconds <= 1);
+            Assert.IsTrue(deltaMilliseconds <= 2);
         }
 
         [TestMethod]

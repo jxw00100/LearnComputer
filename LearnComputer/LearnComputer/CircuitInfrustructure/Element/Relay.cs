@@ -21,7 +21,7 @@ namespace LearnComputer.CircuitInfrustructure
             Input = new InputEndpoint();
             Input.Receive += OnReceive;
             InputOfContact = new InputEndpoint();
-            InputOfContact.Receive += OnContactInputReceive;
+            InputOfContact.Receive += OnReceive;
             Output = new OutputEndpoint();
 
             Input.Transmit(0);  //Relay can send signals from beginning. When being used in invert mode, it plays as power role.
@@ -30,14 +30,20 @@ namespace LearnComputer.CircuitInfrustructure
         private void OnReceive(Endpoint sender, Byte signal)
         {
             if (_initialSendBit == 0 && _deplayMilliseconds > 0) Thread.Sleep(_deplayMilliseconds);
-            Byte outSignal = (Byte) (_invertBit ^ signal);
+
+            var inputSignal = Input.LastReceivedSignal;
+            var contactInputSignal = GetContactInputSignal();
+            Byte outSignal = (Byte)((_invertBit ^ inputSignal) & contactInputSignal);
+
             Output.Produce(outSignal);
+
             _initialSendBit = (Byte) (0 & _initialSendBit);
         }
 
-        private void OnContactInputReceive(Endpoint sender, Byte signal)
+        private Byte GetContactInputSignal()
         {
-            
+            //When unconnected, it will be the power provider of itself.
+            return (InputOfContact.ConnectedPoint == null) ? (Byte) 1 : InputOfContact.LastReceivedSignal;
         }
     }
 }
