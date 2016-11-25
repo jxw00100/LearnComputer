@@ -9,7 +9,6 @@ namespace LearnComputer.CircuitInfrustructure
         private const string DUPLICATE_ENDPOINTS_EXCETION = "Unable to connect 2 same endpoints.";
         private NeutralEndpoint[] _endpoints;
         private Dictionary<NeutralEndpoint, Int32> _inputStatus = new Dictionary<NeutralEndpoint, Int32>();
-        private Dictionary<NeutralEndpoint, Int32> _outputStatus = new Dictionary<NeutralEndpoint, Int32>();
 
         public Int32 LastSignalStatus
         {
@@ -45,7 +44,11 @@ namespace LearnComputer.CircuitInfrustructure
 
                 _endpoints[i].Receive += SignalReceivedHandler;
                 _inputStatus.Add(_endpoints[i], 0);
-                _outputStatus.Add(_endpoints[i], 0);
+            }
+
+            for (var i = 0; i < _endpoints.Length; i++)
+            {
+                _endpoints[i].Produce(LastSignalStatus);
             }
         }
 
@@ -76,15 +79,15 @@ namespace LearnComputer.CircuitInfrustructure
                             points.Produce(signal);
                         }
                     }
-                    _inputStatus[(NeutralEndpoint) sender.ConnectedPoint] = signal;
                 }
             }
+            _inputStatus[(NeutralEndpoint)sender.ConnectedPoint] = signal;
         }
 
         private Int32 LastSignalStatusExcludeThisSender(IEndpoint sender)
         {
             Int32 preSignal = 0;
-            foreach (NeutralEndpoint points in _endpoints)
+            foreach (INeutralEndpoint points in _endpoints)
             {
                 if (!Object.ReferenceEquals(sender, points.ConnectedPoint))
                 {
