@@ -56,6 +56,7 @@
     <Compile Include="CircuitInfrustructure\Basic\Wire.cs" />
     <Compile Include="CircuitInfrustructure\Element\Decoder2To4.cs" />
     <Compile Include="CircuitInfrustructure\Element\LogicGates\ANDGate.cs" />
+    <Compile Include="CircuitInfrustructure\Element\LogicGates\XNORGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\LogicGates\XORGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\Relays\Delayer.cs" />
     <Compile Include="CircuitInfrustructure\Element\Relays\Invertor.cs" />
