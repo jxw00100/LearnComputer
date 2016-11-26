@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CircuitInfrustructure\Decoder2To4.Test.cs" />
     <Compile Include="CircuitInfrustructure\LogicGate.Test.cs" />
     <Compile Include="CircuitInfrustructure\Endpoint.Test.cs" />
     <Compile Include="CircuitInfrustructure\Nexus.Test.cs" />

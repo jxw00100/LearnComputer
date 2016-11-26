@@ -1,10 +1,12 @@
-﻿namespace LearnComputer.CircuitInfrustructure.Element
+﻿using System;
+
+namespace LearnComputer.CircuitInfrustructure
 {
     public class Decoder2To4
     {
-        TShapedNexus _nexusUp1, _nexusUp2, _nexusDown1, _nexusDown2;
-        CrossNexus _crossNexus;
-        Invertor _invertorUp, _invertorDown;
+        TShapedNexus _tshapeNexus1, _tshapeNexus2;
+        CrossNexus _crossNexus1, _crossNexus2;
+        Invertor _invertor1, _invertor2;
         ANDGate _andGate00, _andGate01, _andGate10, _andGate11;
 
         public IInputEndpoint Input1 { get; private set; }
@@ -16,24 +18,51 @@
 
         public Decoder2To4()
         {
-            _invertorUp = new Invertor();
-            _invertorDown = new Invertor();
+            _invertor1 = new Invertor();
+            _invertor2 = new Invertor();
             _andGate00 = new ANDGate();
             _andGate01 = new ANDGate();
             _andGate10 = new ANDGate();
             _andGate11 = new ANDGate();
 
-            _crossNexus = new CrossNexus(null, _andGate10.Input1, _invertorUp.Input, _andGate11.Input1);
-            _nexusUp1 = new TShapedNexus(_invertorUp.Output, _andGate00.Input1, _andGate01.Input1);
-            _nexusUp2 = new TShapedNexus(_invertorDown.Output, _andGate00.Input2, _andGate10.Input1);
-            _nexusDown1 = new TShapedNexus(null, _invertorDown.Input, null);
-            _nexusDown2 = new TShapedNexus(_nexusDown1.GetEndpointAt(2), _andGate01.Input2, _andGate11.Input2);
 
+            _invertor1.Input.Receive += receive0;
+            _andGate00.Input1.Receive += receive1;
+            _andGate00.Input2.Receive += receive2;
+            
+
+            _crossNexus1 = new CrossNexus(null, _andGate10.Input1, _invertor1.Input, _andGate11.Input1);
+            _crossNexus2 = new CrossNexus(null, _andGate01.Input2, _invertor2.Input, _andGate11.Input2);
+            _tshapeNexus1 = new TShapedNexus(_invertor1.Output, _andGate00.Input1, _andGate01.Input1);
+            _tshapeNexus2 = new TShapedNexus(_invertor2.Output, _andGate00.Input2, _andGate10.Input2);
+
+            _tshapeNexus1.GetEndpointAt(0).Receive += receive3;
+
+            Input1 = _crossNexus1.GetEndpointAt(0);
+            Input2 = _crossNexus2.GetEndpointAt(0);
             Output00 = _andGate00.Output;
             Output01 = _andGate01.Output;
             Output10 = _andGate10.Output;
             Output11 = _andGate11.Output;
         }
 
+        private void receive0(IEndpoint sd, Int32 sig)
+        {
+
+        }
+
+        private void receive1(IEndpoint sd, Int32 sig)
+        {
+            
+        }
+        private void receive2(IEndpoint sd, Int32 sig)
+        {
+
+        }
+
+        private void receive3(IEndpoint sd, Int32 sig)
+        {
+
+        }
     }
 }
