@@ -150,5 +150,46 @@ namespace ComputerTest.CircuitInfrustructure
             output1.Produce(1);
             Assert.AreEqual(inputSignal, 1);
         }
+
+        [TestMethod]
+        public void ToggleInpuSigalWhilePrechargedBeforeCreating()
+        {
+            IInputEndpoint input1 = new InputEndpoint();
+            IInputEndpoint input2 = new InputEndpoint();
+            Int32 inputSignal1 = 0;
+            input1.Receive += (sender, signal) => { inputSignal1 = signal; };
+            Int32 inputSignal2 = 0;
+            input1.Receive += (sender, signal) => { inputSignal2 = signal; };
+
+            IOutputEndpoint output = new OutputEndpoint();
+            output.Produce(1);
+
+            Nexus nexus = new Nexus(3, output, input1, input2);
+
+            Assert.AreEqual(inputSignal1, 1);
+            Assert.AreEqual(inputSignal2, 1);
+
+            output.Produce(0);
+            Assert.AreEqual(inputSignal1, 0);
+            Assert.AreEqual(inputSignal2, 0);
+
+            output.Produce(0);
+            Assert.AreEqual(inputSignal1, 0);
+            Assert.AreEqual(inputSignal2, 0);
+
+            output.Produce(1);
+            Assert.AreEqual(inputSignal1, 1);
+            Assert.AreEqual(inputSignal2, 1);
+
+            output.Produce(1);
+            Assert.AreEqual(inputSignal1, 1);
+            Assert.AreEqual(inputSignal2, 1);
+
+            output.Produce(0);
+            Assert.AreEqual(inputSignal1, 0);
+            Assert.AreEqual(inputSignal2, 0);
+        }
     }
+
+
 }

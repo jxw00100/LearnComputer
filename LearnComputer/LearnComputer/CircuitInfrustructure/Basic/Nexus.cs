@@ -33,22 +33,14 @@ namespace LearnComputer.CircuitInfrustructure
         {
             for (var i = 0; i < _endpoints.Length; i++)
             {
-                if (i < connectedPoints.Length)
-                {
-                    _endpoints[i] = new NeutralEndpoint(connectedPoints[i]);
-                }
-                else
-                {
-                    _endpoints[i] = new NeutralEndpoint();
-                }
-
+                _endpoints[i] = new NeutralEndpoint();
                 _endpoints[i].Receive += SignalReceivedHandler;
                 _inputStatus.Add(_endpoints[i], 0);
             }
 
-            for (var i = 0; i < _endpoints.Length; i++)
+            for (var i = 0; i < connectedPoints.Length && i < _endpoints.Length; i++)
             {
-                _endpoints[i].Produce(LastSignalStatus);
+                _endpoints[i].ConnectTo(connectedPoints[i]);
             }
         }
 
