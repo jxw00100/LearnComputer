@@ -1,0 +1,27 @@
+﻿namespace LearnComputer.CircuitInfrustructure
+{
+    public class HalfAdder
+    {
+        private ANDGate _andGate;
+        private XORGate _xorGate;
+        private TShapedNexus _nexus1, _nexus2;
+        
+        public IInputEndpoint Input1 { get; private set; }
+        public IInputEndpoint Input2 { get; private set; }
+        public IOutputEndpoint Sum { get; private set; }
+        public IOutputEndpoint CarryOut { get; private set; }
+        
+        public HalfAdder()
+        {
+            _andGate = new ANDGate();
+            _xorGate = new XORGate();
+            _nexus1 = new TShapedNexus(null, _andGate.Input1, _xorGate.Input1);
+            _nexus2 = new TShapedNexus(null, _andGate.Input2, _xorGate.Input2);
+
+            Input1 = _nexus1.GetEndpointAt(0);
+            Input2 = _nexus2.GetEndpointAt(0);
+            Sum = _xorGate.Output;
+            CarryOut = _andGate.Output;
+        }
+    }
+}

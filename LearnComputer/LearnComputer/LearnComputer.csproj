@@ -55,6 +55,7 @@
     <Compile Include="CircuitInfrustructure\Basic\TShapedNexus.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Wire.cs" />
     <Compile Include="CircuitInfrustructure\Element\Decoder2To4.cs" />
+    <Compile Include="CircuitInfrustructure\Element\HalfAdder.cs" />
     <Compile Include="CircuitInfrustructure\Element\LogicGates\Advanced\MultiORGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\LogicGates\Advanced\MultiANDGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\LogicGates\Basic\ANDGate.cs" />

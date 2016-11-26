@@ -48,7 +48,7 @@ namespace ComputerTest.CircuitInfrustructure
         }
 
         [TestMethod]
-        public void InitializeWithSettings()
+        public void InitializeWithFullSettings()
         {
             Switches8Bits switches = new Switches8Bits(false, true, false, true, true, false, true, false);
             Assert.IsNotNull(switches);
