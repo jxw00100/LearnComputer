@@ -25,18 +25,10 @@ namespace LearnComputer.CircuitInfrustructure
             _andGate10 = new ANDGate();
             _andGate11 = new ANDGate();
 
-
-            _invertor1.Input.Receive += receive0;
-            _andGate00.Input1.Receive += receive1;
-            _andGate00.Input2.Receive += receive2;
-            
-
             _crossNexus1 = new CrossNexus(null, _andGate10.Input1, _invertor1.Input, _andGate11.Input1);
             _crossNexus2 = new CrossNexus(null, _andGate01.Input2, _invertor2.Input, _andGate11.Input2);
             _tshapeNexus1 = new TShapedNexus(_invertor1.Output, _andGate00.Input1, _andGate01.Input1);
             _tshapeNexus2 = new TShapedNexus(_invertor2.Output, _andGate00.Input2, _andGate10.Input2);
-
-            _tshapeNexus1.GetEndpointAt(0).Receive += receive3;
 
             Input1 = _crossNexus1.GetEndpointAt(0);
             Input2 = _crossNexus2.GetEndpointAt(0);
@@ -44,25 +36,6 @@ namespace LearnComputer.CircuitInfrustructure
             Output01 = _andGate01.Output;
             Output10 = _andGate10.Output;
             Output11 = _andGate11.Output;
-        }
-
-        private void receive0(IEndpoint sd, Int32 sig)
-        {
-
-        }
-
-        private void receive1(IEndpoint sd, Int32 sig)
-        {
-            
-        }
-        private void receive2(IEndpoint sd, Int32 sig)
-        {
-
-        }
-
-        private void receive3(IEndpoint sd, Int32 sig)
-        {
-
         }
     }
 }
