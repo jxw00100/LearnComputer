@@ -54,8 +54,11 @@
     <Compile Include="CircuitInfrustructure\Basic\ReceiveSignalHanlder.cs" />
     <Compile Include="CircuitInfrustructure\Basic\TShapedNexus.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Wire.cs" />
-    <Compile Include="CircuitInfrustructure\Element\Decoder2To4.cs" />
-    <Compile Include="CircuitInfrustructure\Element\HalfAdder.cs" />
+    <Compile Include="CircuitInfrustructure\Element\Decoder\Decoder2To4.cs" />
+    <Compile Include="CircuitInfrustructure\Element\Adder\FullAdder.cs" />
+    <Compile Include="CircuitInfrustructure\Element\Adder\HalfAdder.cs" />
+    <Compile Include="CircuitInfrustructure\Element\Adder\IFullAdder.cs" />
+    <Compile Include="CircuitInfrustructure\Element\Adder\IHalfAdder.cs" />
     <Compile Include="CircuitInfrustructure\Element\LogicGates\Advanced\MultiORGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\LogicGates\Advanced\MultiANDGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\LogicGates\Basic\ANDGate.cs" />
@@ -67,7 +70,7 @@
     <Compile Include="CircuitInfrustructure\Element\LogicGates\Basic\ORGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\LogicGates\Basic\NANDGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\Relays\Relay.cs" />
-    <Compile Include="CircuitInfrustructure\Element\Switches8Bits.cs" />
+    <Compile Include="CircuitInfrustructure\Element\Switches\Switches8Bits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

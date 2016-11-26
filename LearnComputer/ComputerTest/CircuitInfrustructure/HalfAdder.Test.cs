@@ -19,8 +19,8 @@ namespace ComputerTest.CircuitInfrustructure
             _lightSum = new IndicatorLight();
             _lightCarry = new IndicatorLight();
 
-            _halfAdder.Input1.ConnectTo(_power1.Output);
-            _halfAdder.Input2.ConnectTo(_power2.Output);
+            _halfAdder.Number1In.ConnectTo(_power1.Output);
+            _halfAdder.Number2In.ConnectTo(_power2.Output);
             _halfAdder.Sum.ConnectTo(_lightSum.Input);
             _halfAdder.CarryOut.ConnectTo(_lightCarry.Input);
         }
@@ -40,8 +40,20 @@ namespace ComputerTest.CircuitInfrustructure
         [TestMethod]
         public void CreateNew()
         {
-            HalfAdder halfAdder = new HalfAdder();
+            IHalfAdder halfAdder = new HalfAdder();
             Assert.IsNotNull(halfAdder);
+
+            Assert.IsNotNull(halfAdder.Number1In);
+            Assert.AreEqual(halfAdder.Number1In.LastReceivedSignal, 0);
+
+            Assert.IsNotNull(halfAdder.Number2In);
+            Assert.AreEqual(halfAdder.Number2In.LastReceivedSignal, 0);
+
+            Assert.IsNotNull(halfAdder.Sum);
+            Assert.AreEqual(halfAdder.Sum.LastSentSignal, 0);
+
+            Assert.IsNotNull(halfAdder.CarryOut);
+            Assert.AreEqual(halfAdder.CarryOut.LastSentSignal, 0);
         }
 
         [TestMethod]

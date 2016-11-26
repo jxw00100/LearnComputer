@@ -1,6 +1,6 @@
 ﻿namespace LearnComputer.CircuitInfrustructure
 {
-    public class HalfAdder
+    public class HalfAdder : IHalfAdder
     {
         private ANDGate _andGate;
         private XORGate _xorGate;
