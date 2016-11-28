@@ -23,8 +23,9 @@ namespace LearnComputer.CircuitInfrustructure
 
         public override void DisconnectEndpoint()
         {
+            var previousEndpoint = ConnectedPoint;
             base.DisconnectEndpoint();
-            Transmit(0);
+            if (previousEndpoint != null && LastReceivedSignal != 0) Transmit(0);
         }
     }
 

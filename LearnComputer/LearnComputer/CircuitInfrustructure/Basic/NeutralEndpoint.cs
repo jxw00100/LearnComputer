@@ -28,8 +28,9 @@ namespace LearnComputer.CircuitInfrustructure
 
         public override void ConnectTo(IEndpoint point)
         {
+            var previousEndpoint = ConnectedPoint;
             base.ConnectTo(point);
-            Produce(LastSentSignal);
+            if (!Object.ReferenceEquals(previousEndpoint, point)) Produce(LastSentSignal);
         }
     }
 }

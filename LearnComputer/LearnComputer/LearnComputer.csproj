@@ -41,12 +41,17 @@
   <ItemGroup>
     <Compile Include="CircuitInfrustructure\Basic\CrossNexus.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Endpoint.cs" />
-    <Compile Include="CircuitInfrustructure\Basic\IEndpoint.cs" />
-    <Compile Include="CircuitInfrustructure\Basic\IInputEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\EndpointCollection.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\Interface\IEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\Interface\IEndpointCollection.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\Interface\IInputEndpoint.cs" />
     <Compile Include="CircuitInfrustructure\Basic\IndicatorLight.cs" />
-    <Compile Include="CircuitInfrustructure\Basic\INeutralEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\Interface\IInputEndpointCollection.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\Interface\INeutralEndpoint.cs" />
     <Compile Include="CircuitInfrustructure\Basic\InputEndpoint.cs" />
-    <Compile Include="CircuitInfrustructure\Basic\IOutputEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\Interface\INeutralEndpointCollection.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\Interface\IOutputEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\Interface\IOutputEndpointCollection.cs" />
     <Compile Include="CircuitInfrustructure\Basic\NeutralEndpoint.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Nexus.cs" />
     <Compile Include="CircuitInfrustructure\Basic\OutputEndpoint.cs" />
@@ -71,6 +76,7 @@
     <Compile Include="CircuitInfrustructure\Element\LogicGates\Basic\NANDGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\Relays\Relay.cs" />
     <Compile Include="CircuitInfrustructure\Element\Switches\Switches8Bits.cs" />
+    <Compile Include="Component\Calculator\Adder8Bits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

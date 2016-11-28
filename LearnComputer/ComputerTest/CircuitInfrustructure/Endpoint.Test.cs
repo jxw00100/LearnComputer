@@ -112,6 +112,96 @@ namespace ComputerTest.CircuitInfrustructure
         }
 
         [TestMethod]
+        public void DisconnectInputWithoutConnection()
+        {
+            IInputEndpoint input = new InputEndpoint();
+            Int32 callTimes = 0;
+            input.Receive += (sender, signal) =>
+            {
+                callTimes++;
+            };
+
+            input.DisconnectEndpoint();
+            Assert.AreEqual(callTimes, 0);
+            input.DisconnectEndpoint();
+            Assert.AreEqual(callTimes, 0);
+        }
+
+        [TestMethod]
+        public void DisconnectInputWithConnectionNoCharge()
+        {
+            IInputEndpoint input = new InputEndpoint();
+            Int32 callTimes = 0;
+            input.Receive += (sender, signal) =>
+            {
+                callTimes++;
+            };
+            IOutputEndpoint output = new OutputEndpoint(input);
+
+            input.DisconnectEndpoint();
+
+            Assert.AreEqual(callTimes, 1);
+        }
+
+        [TestMethod]
+        public void DisconnectInputMoreThanOneTimeWithConnectionNoCharge()
+        {
+            IInputEndpoint input = new InputEndpoint();
+            Int32 callTimes = 0;
+            input.Receive += (sender, signal) =>
+            {
+                callTimes++;
+            };
+            IOutputEndpoint output = new OutputEndpoint(input);
+
+            input.DisconnectEndpoint();
+            input.DisconnectEndpoint();
+            input.DisconnectEndpoint();
+            input.DisconnectEndpoint();
+
+            Assert.AreEqual(callTimes, 1);
+        }
+
+        [TestMethod]
+        public void DisconnectInputWithConnectionPrecharged()
+        {
+            IInputEndpoint input = new InputEndpoint();
+            Int32 callTimes = 0;
+            input.Receive += (sender, signal) =>
+            {
+                callTimes++;
+            };
+            IOutputEndpoint output = new OutputEndpoint();
+            output.Produce(1);
+            output.ConnectTo(input);
+
+            input.DisconnectEndpoint();
+
+            Assert.AreEqual(callTimes, 2);
+        }
+
+        [TestMethod]
+        public void DisconnectInputMoreThanOneTimeWithConnectionPrecharged()
+        {
+            IInputEndpoint input = new InputEndpoint();
+            Int32 callTimes = 0;
+            input.Receive += (sender, signal) =>
+            {
+                callTimes++;
+            };
+            IOutputEndpoint output = new OutputEndpoint();
+            output.Produce(1);
+            output.ConnectTo(input);
+
+            input.DisconnectEndpoint();
+            input.DisconnectEndpoint();
+            input.DisconnectEndpoint();
+            input.DisconnectEndpoint();
+
+            Assert.AreEqual(callTimes, 2);
+        }
+
+        [TestMethod]
         public void ChangeEndpointMidwayWithPrechargedSignal()
         {
             IInputEndpoint input1 = new InputEndpoint();
@@ -164,6 +254,64 @@ namespace ComputerTest.CircuitInfrustructure
             Assert.IsNotNull(input3.ConnectedPoint);
             Assert.AreSame(input2.ConnectedPoint, input3);
             Assert.AreSame(input3.ConnectedPoint, input2);
+        }
+
+        [TestMethod]
+        public void inputConnectToTheSameOutputMoreThanOneTime()
+        {
+            IInputEndpoint input = new InputEndpoint();
+            Int32 callTimes = 0;
+            input.Receive += (sender, signal) =>
+            {
+                callTimes++;
+            };
+            IOutputEndpoint output = new OutputEndpoint();
+            input.ConnectTo(output);
+            Assert.AreEqual(callTimes, 1);
+
+            input.ConnectTo(output);
+            Assert.AreEqual(callTimes, 1);
+
+            output.ConnectTo(input);
+            Assert.AreEqual(callTimes, 1);
+
+            output.ConnectTo(input);
+            Assert.AreEqual(callTimes, 1);
+
+            input.ConnectTo(output);
+            Assert.AreEqual(callTimes, 1);
+
+            output.ConnectTo(input);
+            Assert.AreEqual(callTimes, 1);
+        }
+
+        [TestMethod]
+        public void inputConnectToTheSameNeutralMoreThanOneTime()
+        {
+            IInputEndpoint input = new InputEndpoint();
+            Int32 callTimes = 0;
+            input.Receive += (sender, signal) =>
+            {
+                callTimes++;
+            };
+            INeutralEndpoint neutral = new NeutralEndpoint();
+            input.ConnectTo(neutral);
+            Assert.AreEqual(callTimes, 1);
+
+            input.ConnectTo(neutral);
+            Assert.AreEqual(callTimes, 1);
+
+            neutral.ConnectTo(input);
+            Assert.AreEqual(callTimes, 1);
+
+            neutral.ConnectTo(input);
+            Assert.AreEqual(callTimes, 1);
+
+            input.ConnectTo(neutral);
+            Assert.AreEqual(callTimes, 1);
+
+            neutral.ConnectTo(input);
+            Assert.AreEqual(callTimes, 1);
         }
 
         [TestMethod]
