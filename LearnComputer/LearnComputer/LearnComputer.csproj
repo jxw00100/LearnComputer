@@ -42,6 +42,7 @@
     <Compile Include="CircuitInfrustructure\Basic\CrossNexus.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Endpoint.cs" />
     <Compile Include="CircuitInfrustructure\Basic\EndpointCollection.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\InputEndpointCollection.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Interface\IEndpoint.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Interface\IEndpointCollection.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Interface\IInputEndpoint.cs" />
@@ -53,8 +54,10 @@
     <Compile Include="CircuitInfrustructure\Basic\Interface\IOutputEndpoint.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Interface\IOutputEndpointCollection.cs" />
     <Compile Include="CircuitInfrustructure\Basic\NeutralEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\NeutralEndpointCollection.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Nexus.cs" />
     <Compile Include="CircuitInfrustructure\Basic\OutputEndpoint.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\OutputEndpointCollection.cs" />
     <Compile Include="CircuitInfrustructure\Basic\PowerSupplier.cs" />
     <Compile Include="CircuitInfrustructure\Basic\ReceiveSignalHanlder.cs" />
     <Compile Include="CircuitInfrustructure\Basic\TShapedNexus.cs" />
