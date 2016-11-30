@@ -6,8 +6,8 @@ namespace LearnComputer.CircuitInfrustructure
 {
     public class InputEndpointCollection<T> : EndpointCollection<T>, IInputEndpointCollection<T> where T : IInputEndpoint, new()
     {
-        public InputEndpointCollection(Int32 width)
-            : base(width)
+        public InputEndpointCollection(Int32 width, IEnumerable<T> endpoints = null)
+            : base(width, endpoints)
         {
         }
 

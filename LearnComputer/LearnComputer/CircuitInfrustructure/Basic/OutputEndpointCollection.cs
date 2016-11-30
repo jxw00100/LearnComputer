@@ -6,7 +6,8 @@ namespace LearnComputer.CircuitInfrustructure
 {
     public class OutputEndpointCollection<T> : EndpointCollection<T>, IOutputEndpointCollection<T> where T : IOutputEndpoint, new()
     {
-        public OutputEndpointCollection(Int32 width) : base(width)
+        public OutputEndpointCollection(Int32 width, IEnumerable<T> endpoints = null)
+            : base(width, endpoints)
         {
         }
 

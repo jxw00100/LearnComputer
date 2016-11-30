@@ -1,7 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Channels;
 using LearnComputer.CircuitInfrustructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -94,6 +93,54 @@ namespace ComputerTest.CircuitInfrustructure
                 Assert.IsInstanceOfType(neutral, typeof(NeutralEndpoint));
                 Assert.IsNull(neutral.ConnectedPoint);
             }
+        }
+
+        [TestMethod]
+        public void EndpointCollectionInitWthExistingEndpointsFull()
+        {
+            InputEndpoint input1 = new InputEndpoint();
+            InputEndpoint input2 = new InputEndpoint();
+            InputEndpoint input3 = new InputEndpoint();
+
+            IEnumerable<InputEndpoint> endpoints = new InputEndpoint[] { input1, input2, input3 };
+
+            IEndpointCollection<IEndpoint> inputCollection = new EndpointCollection<InputEndpoint>(3, endpoints);
+
+            Assert.IsNotNull(inputCollection[0]);
+            Assert.AreSame(input1, inputCollection[0]);
+
+            Assert.IsNotNull(inputCollection[1]);
+            Assert.AreSame(input2, inputCollection[1]);
+
+            Assert.IsNotNull(inputCollection[2]);
+            Assert.AreSame(input3, inputCollection[2]);
+        }
+
+        [TestMethod]
+        public void EndpointCollectionInitWthExistingEndpointsInsufficient()
+        {
+            InputEndpoint input1 = new InputEndpoint();
+            InputEndpoint input2 = new InputEndpoint();
+            InputEndpoint input3 = new InputEndpoint();
+
+            IEnumerable<InputEndpoint> endpoints = new InputEndpoint[] { input1, input2, input3 };
+
+            IEndpointCollection<IEndpoint> inputCollection = new EndpointCollection<InputEndpoint>(5, endpoints);
+
+            Assert.IsNotNull(inputCollection[0]);
+            Assert.AreSame(input1, inputCollection[0]);
+
+            Assert.IsNotNull(inputCollection[1]);
+            Assert.AreSame(input2, inputCollection[1]);
+
+            Assert.IsNotNull(inputCollection[2]);
+            Assert.AreSame(input3, inputCollection[2]);
+
+            Assert.IsNotNull(inputCollection[3]);
+            Assert.IsInstanceOfType(inputCollection[3], typeof(InputEndpoint));
+
+            Assert.IsNotNull(inputCollection[4]);
+            Assert.IsInstanceOfType(inputCollection[4], typeof(InputEndpoint));
         }
 
         [TestMethod]
@@ -218,6 +265,54 @@ namespace ComputerTest.CircuitInfrustructure
                 Assert.IsInstanceOfType(input, typeof(InputEndpoint));
                 Assert.IsNull(input.ConnectedPoint);
             }
+        }
+
+        [TestMethod]
+        public void InputEndpointCollectionInitWthExistingEndpointsFull()
+        {
+            InputEndpoint input1 = new InputEndpoint();
+            InputEndpoint input2 = new InputEndpoint();
+            InputEndpoint input3 = new InputEndpoint();
+
+            IEnumerable<InputEndpoint> endpoints = new InputEndpoint[] { input1, input2, input3 };
+
+            IInputEndpointCollection<IInputEndpoint> inputCollection = new InputEndpointCollection<InputEndpoint>(3, endpoints);
+
+            Assert.IsNotNull(inputCollection[0]);
+            Assert.AreSame(input1, inputCollection[0]);
+
+            Assert.IsNotNull(inputCollection[1]);
+            Assert.AreSame(input2, inputCollection[1]);
+
+            Assert.IsNotNull(inputCollection[2]);
+            Assert.AreSame(input3, inputCollection[2]);
+        }
+
+        [TestMethod]
+        public void InputEndpointCollectionInitWthExistingEndpointsInsufficient()
+        {
+            InputEndpoint input1 = new InputEndpoint();
+            InputEndpoint input2 = new InputEndpoint();
+            InputEndpoint input3 = new InputEndpoint();
+
+            IEnumerable<InputEndpoint> endpoints = new InputEndpoint[] { input1, input2, input3 };
+
+            IInputEndpointCollection<IInputEndpoint> inputCollection = new InputEndpointCollection<InputEndpoint>(5, endpoints);
+
+            Assert.IsNotNull(inputCollection[0]);
+            Assert.AreSame(input1, inputCollection[0]);
+
+            Assert.IsNotNull(inputCollection[1]);
+            Assert.AreSame(input2, inputCollection[1]);
+
+            Assert.IsNotNull(inputCollection[2]);
+            Assert.AreSame(input3, inputCollection[2]);
+
+            Assert.IsNotNull(inputCollection[3]);
+            Assert.IsInstanceOfType(inputCollection[3], typeof(InputEndpoint));
+
+            Assert.IsNotNull(inputCollection[4]);
+            Assert.IsInstanceOfType(inputCollection[4], typeof(InputEndpoint));
         }
 
         [TestMethod]
@@ -701,6 +796,54 @@ namespace ComputerTest.CircuitInfrustructure
         }
 
         [TestMethod]
+        public void OutputEndpointCollectionInitWthExistingEndpointsFull()
+        {
+            OutputEndpoint output1 = new OutputEndpoint();
+            OutputEndpoint output2 = new OutputEndpoint();
+            OutputEndpoint output3 = new OutputEndpoint();
+
+            IEnumerable<OutputEndpoint> endpoints = new OutputEndpoint[] { output1, output2, output3 };
+
+            IOutputEndpointCollection<IOutputEndpoint> outputCollection = new OutputEndpointCollection<OutputEndpoint>(3, endpoints);
+
+            Assert.IsNotNull(outputCollection[0]);
+            Assert.AreSame(output1, outputCollection[0]);
+
+            Assert.IsNotNull(outputCollection[1]);
+            Assert.AreSame(output2, outputCollection[1]);
+
+            Assert.IsNotNull(outputCollection[2]);
+            Assert.AreSame(output3, outputCollection[2]);
+        }
+
+        [TestMethod]
+        public void OutputEndpointCollectionInitWthExistingEndpointsInsufficient()
+        {
+            OutputEndpoint output1 = new OutputEndpoint();
+            OutputEndpoint output2 = new OutputEndpoint();
+            OutputEndpoint output3 = new OutputEndpoint();
+
+            IEnumerable<OutputEndpoint> endpoints = new OutputEndpoint[] { output1, output2, output3 };
+
+            IOutputEndpointCollection<IOutputEndpoint> outputCollection = new OutputEndpointCollection<OutputEndpoint>(5, endpoints);
+
+            Assert.IsNotNull(outputCollection[0]);
+            Assert.AreSame(output1, outputCollection[0]);
+
+            Assert.IsNotNull(outputCollection[1]);
+            Assert.AreSame(output2, outputCollection[1]);
+
+            Assert.IsNotNull(outputCollection[2]);
+            Assert.AreSame(output3, outputCollection[2]);
+
+            Assert.IsNotNull(outputCollection[3]);
+            Assert.IsInstanceOfType(outputCollection[3], typeof(OutputEndpoint));
+
+            Assert.IsNotNull(outputCollection[4]);
+            Assert.IsInstanceOfType(outputCollection[4], typeof(OutputEndpoint));
+        }
+
+        [TestMethod]
         public void OutputEndpointCollectionProduceAllWithSameValue()
         {
             Int32
@@ -1043,6 +1186,54 @@ namespace ComputerTest.CircuitInfrustructure
                 Assert.IsInstanceOfType(neutralEndpoint, typeof(NeutralEndpoint));
                 Assert.IsNull(neutralEndpoint.ConnectedPoint);
             }
+        }
+
+        [TestMethod]
+        public void NeutralEndpointCollectionInitWthExistingEndpointsFull()
+        {
+            NeutralEndpoint neutral1 = new NeutralEndpoint();
+            NeutralEndpoint neutral2 = new NeutralEndpoint();
+            NeutralEndpoint neutral3 = new NeutralEndpoint();
+
+            IEnumerable<NeutralEndpoint> endpoints = new NeutralEndpoint[] { neutral1, neutral2, neutral3 };
+
+            INeutralEndpointCollection<INeutralEndpoint> neutralCollection = new NeutralEndpointCollection<NeutralEndpoint>(3, endpoints);
+
+            Assert.IsNotNull(neutralCollection[0]);
+            Assert.AreSame(neutral1, neutralCollection[0]);
+
+            Assert.IsNotNull(neutralCollection[1]);
+            Assert.AreSame(neutral2, neutralCollection[1]);
+
+            Assert.IsNotNull(neutralCollection[2]);
+            Assert.AreSame(neutral3, neutralCollection[2]);
+        }
+
+        [TestMethod]
+        public void NeutralEndpointCollectionInitWthExistingEndpointsInsufficient()
+        {
+            NeutralEndpoint neutral1 = new NeutralEndpoint();
+            NeutralEndpoint neutral2 = new NeutralEndpoint();
+            NeutralEndpoint neutral3 = new NeutralEndpoint();
+
+            IEnumerable<NeutralEndpoint> endpoints = new NeutralEndpoint[] { neutral1, neutral2, neutral3 };
+
+            INeutralEndpointCollection<INeutralEndpoint> neutralCollection = new NeutralEndpointCollection<NeutralEndpoint>(5, endpoints);
+
+            Assert.IsNotNull(neutralCollection[0]);
+            Assert.AreSame(neutral1, neutralCollection[0]);
+
+            Assert.IsNotNull(neutralCollection[1]);
+            Assert.AreSame(neutral2, neutralCollection[1]);
+
+            Assert.IsNotNull(neutralCollection[2]);
+            Assert.AreSame(neutral3, neutralCollection[2]);
+
+            Assert.IsNotNull(neutralCollection[3]);
+            Assert.IsInstanceOfType(neutralCollection[3], typeof(NeutralEndpoint));
+
+            Assert.IsNotNull(neutralCollection[4]);
+            Assert.IsInstanceOfType(neutralCollection[4], typeof(NeutralEndpoint));
         }
 
         [TestMethod]

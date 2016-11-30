@@ -6,7 +6,8 @@ namespace LearnComputer.CircuitInfrustructure
 {
     public class NeutralEndpointCollection<T>: InputEndpointCollection<T>, INeutralEndpointCollection<T> where T: INeutralEndpoint, new()
     {
-        public NeutralEndpointCollection(Int32 width) : base(width)
+        public NeutralEndpointCollection(Int32 width, IEnumerable<T> endpoints = null)
+            : base(width, endpoints)
         {
         }
 

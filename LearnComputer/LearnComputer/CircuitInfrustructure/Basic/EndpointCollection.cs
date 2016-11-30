@@ -10,7 +10,7 @@ namespace LearnComputer.CircuitInfrustructure
         private T[] _endpoints;
         private InnerEnumerator _enumerator;
 
-        public EndpointCollection(Int32 width)
+        public EndpointCollection(Int32 width, IEnumerable<T> endpoints = null)
         {
             if(width <= 0) throw new ArgumentException("The items count of collection must large than 0.");
 
@@ -19,7 +19,14 @@ namespace LearnComputer.CircuitInfrustructure
 
             for (var i = 0; i < width; i++)
             {
-                _endpoints[i] = new T();
+                if (endpoints != null && i < endpoints.Count() && endpoints.ElementAtOrDefault(i) != null)
+                {
+                    _endpoints[i] = endpoints.ElementAt(i);
+                }
+                else
+                {
+                    _endpoints[i] = new T();
+                }
             }
         }
 

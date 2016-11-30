@@ -3,18 +3,19 @@ using System.ComponentModel;
 
 namespace LearnComputer.CircuitInfrustructure
 {
-    public class Switches8Bits
+    public class Switches
     {
-        private const Int32 WIDTH = 8;
+        private Int32 _width;
         private Boolean[] _switches;
         public IOutputEndpointCollection<IOutputEndpoint> Outputs { get; private set; }
         private Boolean[] _defaults;
 
-        public Switches8Bits(params Boolean[] switchesOn)
+        public Switches(Int32 width, params Boolean[] switchesOn)
         {
-            _switches = new Boolean[WIDTH];
-            _defaults = new Boolean[WIDTH];
-            Outputs = new OutputEndpointCollection<OutputEndpoint>(WIDTH);
+            _width = width;
+            _switches = new Boolean[_width];
+            _defaults = new Boolean[_width];
+            Outputs = new OutputEndpointCollection<OutputEndpoint>(_width);
             
             Set(switchesOn);
         }
@@ -23,7 +24,7 @@ namespace LearnComputer.CircuitInfrustructure
         {
             if (switchesOn != null)
             {
-                for (var i = 0; i < WIDTH && i < switchesOn.Length; i++)
+                for (var i = 0; i < _width && i < switchesOn.Length; i++)
                 {
                     _switches[i] = switchesOn[i];
                 }
@@ -33,7 +34,7 @@ namespace LearnComputer.CircuitInfrustructure
 
         private void DispatchSignal()
         {
-            for (var i = 0; i < WIDTH; i++)
+            for (var i = 0; i < _width; i++)
             {
                 Outputs[i].Produce(Convert.ToInt32(_switches[i]));
             }
@@ -41,7 +42,7 @@ namespace LearnComputer.CircuitInfrustructure
 
         public void Connect(params IEndpoint[] points)
         {
-            for (var i = 0; i < WIDTH && i < points.Length; i++)
+            for (var i = 0; i < _width && i < points.Length; i++)
             {
                 Outputs[i].ConnectTo(points[i]);
             }

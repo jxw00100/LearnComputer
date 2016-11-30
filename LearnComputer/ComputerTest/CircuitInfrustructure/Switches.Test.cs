@@ -7,7 +7,7 @@ namespace ComputerTest.CircuitInfrustructure
     [TestClass]
     public class SwitchesTest
     {
-        Switches8Bits _switches = new Switches8Bits();
+        Switches _switches = new Switches(8);
         IndicatorLight _light1 = new IndicatorLight();
         IndicatorLight _light2 = new IndicatorLight();
         IndicatorLight _light3 = new IndicatorLight();
@@ -43,14 +43,14 @@ namespace ComputerTest.CircuitInfrustructure
         [TestMethod]
         public void DefaultInitialize()
         {
-            Switches8Bits switches = new Switches8Bits();
+            Switches switches = new Switches(8);
             Assert.IsNotNull(switches);
         }
 
         [TestMethod]
         public void InitializeWithFullSettings()
         {
-            Switches8Bits switches = new Switches8Bits(false, true, false, true, true, false, true, false);
+            Switches switches = new Switches(8, false, true, false, true, true, false, true, false);
             Assert.IsNotNull(switches);
             Assert.AreEqual(switches.Outputs[0].LastSentSignal, 0);
             Assert.AreEqual(switches.Outputs[1].LastSentSignal, 1);
@@ -65,7 +65,7 @@ namespace ComputerTest.CircuitInfrustructure
         [TestMethod]
         public void InitializeWithNotFullSettings()
         {
-            Switches8Bits switches = new Switches8Bits(false, true, false, true);
+            Switches switches = new Switches(8, false, true, false, true);
             Assert.IsNotNull(switches);
             Assert.AreEqual(switches.Outputs[0].LastSentSignal, 0);
             Assert.AreEqual(switches.Outputs[1].LastSentSignal, 1);

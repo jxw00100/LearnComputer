@@ -78,8 +78,10 @@
     <Compile Include="CircuitInfrustructure\Element\LogicGates\Basic\ORGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\LogicGates\Basic\NANDGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\Relays\Relay.cs" />
-    <Compile Include="CircuitInfrustructure\Element\Switches\Switches8Bits.cs" />
+    <Compile Include="CircuitInfrustructure\Element\Switches\Switches.cs" />
+    <Compile Include="Component\Calculator\Adder16Bits.cs" />
     <Compile Include="Component\Calculator\Adder8Bits.cs" />
+    <Compile Include="Component\Calculator\IAdderMultiBits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

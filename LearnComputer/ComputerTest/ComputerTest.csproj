@@ -61,6 +61,7 @@
     <Compile Include="CircuitInfrustructure\SimpleCircuits.Test.cs" />
     <Compile Include="CircuitInfrustructure\Switches.Test.cs" />
     <Compile Include="CircuitInfrustructure\Wire.Test.cs" />
+    <Compile Include="Component\Adder.Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
