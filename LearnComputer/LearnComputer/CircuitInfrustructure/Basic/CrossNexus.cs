@@ -1,4 +1,6 @@
-﻿namespace LearnComputer.CircuitInfrustructure
+﻿using System.Collections.Generic;
+
+namespace LearnComputer.CircuitInfrustructure
 {
     public class CrossNexus: Nexus
     {
@@ -7,5 +9,9 @@
             : base(4, connectToPoint1, connectToPoint2, connectToPoint3, connEndpoint4)
         {
         }
+
+        public CrossNexus(IEnumerable<IEndpoint> connectToPoints)
+            : base(4, connectToPoints)
+        { }
     }
 }

@@ -7,26 +7,16 @@ namespace LearnComputer.CircuitInfrustructure
     {
         private const Int32 WIDTH = 8;
         private Boolean[] _switches;
-        public IOutputEndpoint[] Outputs { get; private set; }
+        public IOutputEndpointCollection<IOutputEndpoint> Outputs { get; private set; }
         private Boolean[] _defaults;
 
         public Switches8Bits(params Boolean[] switchesOn)
         {
             _switches = new Boolean[WIDTH];
             _defaults = new Boolean[WIDTH];
-            InitializeOutputs();
+            Outputs = new OutputEndpointCollection<OutputEndpoint>(WIDTH);
             
             Set(switchesOn);
-        }
-
-        private void InitializeOutputs()
-        {
-            Outputs = new IOutputEndpoint[WIDTH];
-
-            for (var i = 0; i < WIDTH; i++)
-            {
-                Outputs[i] = new OutputEndpoint();
-            }
         }
 
         public void Set(params Boolean[] switchesOn)

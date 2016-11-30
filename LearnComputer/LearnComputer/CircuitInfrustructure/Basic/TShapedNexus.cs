@@ -1,4 +1,6 @@
-﻿namespace LearnComputer.CircuitInfrustructure
+﻿using System.Collections.Generic;
+
+namespace LearnComputer.CircuitInfrustructure
 {
     public class TShapedNexus : Nexus
     {
@@ -6,5 +8,9 @@
             IEndpoint connectToPoint3 = null)
             : base(3, connectToPoint1, connectToPoint2, connectToPoint3)
         {}
+
+        public TShapedNexus(IEnumerable<IEndpoint> connectToPoints)
+            : base(3, connectToPoints)
+        { }
     }
 }

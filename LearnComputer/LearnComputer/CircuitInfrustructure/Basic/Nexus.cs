@@ -7,17 +7,17 @@ namespace LearnComputer.CircuitInfrustructure
     public class Nexus
     {
         private const string DUPLICATE_ENDPOINTS_EXCETION = "Unable to connect 2 same endpoints.";
-        private NeutralEndpoint[] _endpoints;
-        private Dictionary<NeutralEndpoint, Int32> _inputStatus = new Dictionary<NeutralEndpoint, Int32>();
+        private INeutralEndpointCollection<INeutralEndpoint> _endpoints;
+        private Dictionary<INeutralEndpoint, Int32> _inputStatus = new Dictionary<INeutralEndpoint, Int32>();
 
         public Int32 LastSignalStatus
         {
             get
             {
                 Int32 preSignal = 0;
-                foreach (NeutralEndpoint points in _endpoints)
+                foreach (Int32 lastSignal in _endpoints.GetLastReceivedSignals())
                 {
-                    preSignal = points.LastReceivedSignal | preSignal;
+                    preSignal = lastSignal | preSignal;
                 }
                 return preSignal;
             }
@@ -25,65 +25,65 @@ namespace LearnComputer.CircuitInfrustructure
 
         public Nexus(Int32 endpointCount, params IEndpoint[] connectedPoints)
         {
-            _endpoints = new NeutralEndpoint[endpointCount];
+            _endpoints = new NeutralEndpointCollection<NeutralEndpoint>(endpointCount);
             InitializeEndpoints(connectedPoints);
         }
 
-        private void InitializeEndpoints(IEndpoint[] connectedPoints)
+        public Nexus(Int32 endpointCount, IEnumerable<IEndpoint> connectedPoints)
         {
-            for (var i = 0; i < _endpoints.Length; i++)
-            {
-                _endpoints[i] = new NeutralEndpoint();
-                _endpoints[i].Receive += SignalReceivedHandler;
-                _inputStatus.Add(_endpoints[i], 0);
-            }
+            _endpoints = new NeutralEndpointCollection<NeutralEndpoint>(endpointCount);
+            InitializeEndpoints(connectedPoints);
+        }
 
-            for (var i = 0; i < connectedPoints.Length && i < _endpoints.Length; i++)
+        private void InitializeEndpoints(IEnumerable<IEndpoint> connectedPoints)
+        {
+            _endpoints.RegisterReceiveHandler(SignalReceivedHandler);
+            foreach (var endpoint in _endpoints)
             {
-                _endpoints[i].ConnectTo(connectedPoints[i]);
+                _inputStatus.Add(endpoint, 0);
             }
+            _endpoints.Connect(connectedPoints);
         }
 
         public Int32 EndpointsCount()
         {
-            return _endpoints.Length;
+            return _endpoints.Count;
         }
 
-        public void ConnectAt(IEndpoint connectedPoint, Int32 atIndex)
+        public void ConnectAt(IEndpoint connectedPoint, Int32 index)
         {
-            NeutralEndpoint endpoint = _endpoints[atIndex];
-            _inputStatus[endpoint] = 0;
-            endpoint.ConnectTo(connectedPoint);
-            endpoint.Produce(LastSignalStatus);
+            _inputStatus[_endpoints[index]] = 0;
+            _endpoints.ConnectAt(index, connectedPoint);
+            _endpoints.ProduceAt(index, LastSignalStatus);
         }
 
         private void SignalReceivedHandler(IEndpoint sender, Int32 signal)
         {
             if (LastSignalStatusExcludeThisSender(sender) == 0)
             {
-                Int32 previousSignal = _inputStatus[(NeutralEndpoint)sender.ConnectedPoint];
+                Int32 previousSignal = _inputStatus[(INeutralEndpoint)sender.ConnectedPoint];
                 if (previousSignal != signal)
                 {
-                    foreach (NeutralEndpoint points in _endpoints)
+                    foreach (INeutralEndpoint endpoint in _endpoints)
                     {
-                        if (!Object.ReferenceEquals(sender, points.ConnectedPoint))
+                        if (!Object.ReferenceEquals(sender, endpoint.ConnectedPoint))
                         {
-                            points.Produce(signal);
+                            endpoint.Produce(signal);
                         }
                     }
                 }
             }
-            _inputStatus[(NeutralEndpoint)sender.ConnectedPoint] = signal;
+            _inputStatus[(INeutralEndpoint)sender.ConnectedPoint] = signal;
         }
 
         private Int32 LastSignalStatusExcludeThisSender(IEndpoint sender)
         {
             Int32 preSignal = 0;
-            foreach (INeutralEndpoint points in _endpoints)
+            foreach (INeutralEndpoint endpoint in _endpoints)
             {
-                if (!Object.ReferenceEquals(sender, points.ConnectedPoint))
+                if (!Object.ReferenceEquals(sender, endpoint.ConnectedPoint))
                 {
-                    preSignal = points.LastReceivedSignal | preSignal;
+                    preSignal = endpoint.LastReceivedSignal | preSignal;
                 }
             }
             return preSignal;
@@ -91,7 +91,7 @@ namespace LearnComputer.CircuitInfrustructure
 
         public INeutralEndpoint GetEndpointAt(Int32 index)
         {
-            if(index <0 || index >= _endpoints.Length) throw new ArgumentException("Index out of the endpoints bound");
+            if(index <0 || index >= _endpoints.Count) throw new ArgumentException("Index out of the endpoints bound");
             return _endpoints[index];
         }
     }

@@ -50,6 +50,33 @@ namespace ComputerTest.CircuitInfrustructure
         }
 
         [TestMethod]
+        public void CreateNewWithInputEndpointCollection()
+        {
+            IInputEndpointCollection<IInputEndpoint> inputs = new InputEndpointCollection<InputEndpoint>(3);
+            Nexus nexus = new Nexus(3, inputs);
+
+            Assert.IsNotNull(nexus);
+        }
+
+        [TestMethod]
+        public void CreateNewWithOutputEndpointCollection()
+        {
+            IOutputEndpointCollection<IOutputEndpoint> outputs = new OutputEndpointCollection<OutputEndpoint>(3);
+            Nexus nexus = new Nexus(3, outputs);
+
+            Assert.IsNotNull(nexus);
+        }
+
+        [TestMethod]
+        public void CreateNewWithNeutralEndpointCollection()
+        {
+            INeutralEndpointCollection<INeutralEndpoint> neutrals = new NeutralEndpointCollection<NeutralEndpoint>(3);
+            Nexus nexus = new Nexus(3, neutrals);
+
+            Assert.IsNotNull(nexus);
+        }
+
+        [TestMethod]
         public void CreateNewWithNoConnectionPoint()
         {
             Nexus nexus = new Nexus(3);

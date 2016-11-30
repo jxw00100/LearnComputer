@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LearnComputer.CircuitInfrustructure
 {
@@ -37,13 +38,13 @@ namespace LearnComputer.CircuitInfrustructure
             get { return _endpoints.Length; }
         }
 
-        public void Connect<TE>(IEndpointCollection<TE> connectToPoints) where TE : IEndpoint
+        public void Connect<TE>(IEnumerable<TE> connectToPoints) where TE : IEndpoint
         {
             if(connectToPoints == null) throw new ArgumentException("The connectToPoints collection is null.");
 
-            for (var i = 0; i < _endpoints.Length && i < connectToPoints.Count; i++)
+            for (var i = 0; i < _endpoints.Length && i < connectToPoints.Count(); i++)
             {
-                _endpoints[i].ConnectTo(connectToPoints[i]);
+                _endpoints[i].ConnectTo(connectToPoints.ElementAt(i));
             }
         }
 

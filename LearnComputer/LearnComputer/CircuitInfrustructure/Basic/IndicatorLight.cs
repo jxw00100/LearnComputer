@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Channels;
-using System.Security.Policy;
 
 namespace LearnComputer.CircuitInfrustructure
 {
     public class IndicatorLight
     {
-        public InputEndpoint Input { get; private set; }
+        public IInputEndpoint Input { get; private set; }
         public Boolean Lighting { get; private set; }
 
         public IndicatorLight()
