@@ -50,7 +50,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CircuitInfrustructure\Decoder2To4.Test.cs" />
+    <Compile Include="Assist\Extension.cs" />
+    <Compile Include="Component\AdderSubtractor.Test.cs" />
+    <Compile Include="Component\Complementor.Test.cs" />
+    <Compile Include="Component\Decoder2To4.Test.cs" />
     <Compile Include="CircuitInfrustructure\EndpointCollections.Test.cs" />
     <Compile Include="CircuitInfrustructure\FullAdder.Test.cs" />
     <Compile Include="CircuitInfrustructure\HalfAdder.Test.cs" />

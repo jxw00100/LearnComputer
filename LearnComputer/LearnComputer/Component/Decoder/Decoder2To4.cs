@@ -1,6 +1,7 @@
 ﻿using System;
+using LearnComputer.CircuitInfrustructure;
 
-namespace LearnComputer.CircuitInfrustructure
+namespace LearnComputer.Component
 {
     public class Decoder2To4
     {

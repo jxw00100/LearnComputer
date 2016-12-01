@@ -1,5 +1,6 @@
 ﻿using System;
 using LearnComputer.CircuitInfrustructure;
+using LearnComputer.Component;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ComputerTest.CircuitInfrustructure

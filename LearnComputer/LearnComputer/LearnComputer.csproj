@@ -62,7 +62,10 @@
     <Compile Include="CircuitInfrustructure\Basic\ReceiveSignalHanlder.cs" />
     <Compile Include="CircuitInfrustructure\Basic\TShapedNexus.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Wire.cs" />
-    <Compile Include="CircuitInfrustructure\Element\Decoder\Decoder2To4.cs" />
+    <Compile Include="Component\Calculator\AdderSubtractor8Bits.cs" />
+    <Compile Include="Component\Calculator\IAdderSubtractor8Bits.cs" />
+    <Compile Include="Component\Complementor\Complementor8Bits.cs" />
+    <Compile Include="Component\Decoder\Decoder2To4.cs" />
     <Compile Include="CircuitInfrustructure\Element\Adder\FullAdder.cs" />
     <Compile Include="CircuitInfrustructure\Element\Adder\HalfAdder.cs" />
     <Compile Include="CircuitInfrustructure\Element\Adder\IFullAdder.cs" />
@@ -79,9 +82,9 @@
     <Compile Include="CircuitInfrustructure\Element\LogicGates\Basic\NANDGate.cs" />
     <Compile Include="CircuitInfrustructure\Element\Relays\Relay.cs" />
     <Compile Include="CircuitInfrustructure\Element\Switches\Switches.cs" />
-    <Compile Include="Component\Calculator\Adder16Bits.cs" />
-    <Compile Include="Component\Calculator\Adder8Bits.cs" />
-    <Compile Include="Component\Calculator\IAdderMultiBits.cs" />
+    <Compile Include="Component\Adder\Adder16Bits.cs" />
+    <Compile Include="Component\Adder\Adder8Bits.cs" />
+    <Compile Include="Component\Adder\IAdderMultiBits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

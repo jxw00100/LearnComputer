@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
+using ComputerTest.Assist;
 using LearnComputer.CircuitInfrustructure;
 using LearnComputer.Component;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.Win32;
 
 namespace ComputerTest.Component
 {
@@ -77,52 +79,26 @@ namespace ComputerTest.Component
         {
             if(binaryResult.Length > 9) throw new ArgumentException("Result is too long.");
 
-            var results = binaryResult.Select(c => (c=='1')? true:false).Reverse();
-            Boolean carry = false;
-            if (results.Count() > 8)
-            {
-                carry = results.ElementAt(results.Count() - 1);
-            }
-
-            for (var i = 0; i < 8; i++)
-            {
-                if (i < results.Count())
-                {
-                    Assert.AreEqual(_8BitsSumLights[i].Lighting, results.ElementAt(i));
-                }
-                else
-                {
-                    Assert.IsFalse(_8BitsSumLights[i].Lighting);
-                }
-            }
-
-            Assert.AreEqual(_carryOutLightFor8Bits.Lighting, carry);
+            _8BitsSumLights.AssertEquals(binaryResult);
+            AssertCarryEquals(_carryOutLightFor8Bits, 8, binaryResult);
         }
 
         private void Assert16BitsResultEquals(String binaryResult)
         {
             if (binaryResult.Length > 17) throw new ArgumentException("Result is too long.");
 
-            var results = binaryResult.Select(c => (c == '1') ? true : false).Reverse();
+            _16BitsSumLights.AssertEquals(binaryResult);
+            AssertCarryEquals(_carryOutLightFor16Bits, 16, binaryResult);
+        }
+
+        private void AssertCarryEquals(IndicatorLight carryLight, Int32 bits, String binaryResult)
+        {
             Boolean carry = false;
-            if (results.Count() > 16)
+            if (binaryResult.Length > bits)
             {
-                carry = results.ElementAt(results.Count() - 1);
+                carry = (binaryResult[0] == '1' ? true : false);
             }
-
-            for (var i = 0; i < 16; i++)
-            {
-                if (i < results.Count())
-                {
-                    Assert.AreEqual(_16BitsSumLights[i].Lighting, results.ElementAt(i));
-                }
-                else
-                {
-                    Assert.IsFalse(_16BitsSumLights[i].Lighting);
-                }
-            }
-
-            Assert.AreEqual(_carryOutLightFor16Bits.Lighting, carry);
+            Assert.AreEqual(carryLight.Lighting, carry);
         }
 
         [TestInitialize]
