@@ -2,7 +2,7 @@
 
 namespace LearnComputer.Component
 {
-    public interface IAdderSubtractor8Bits
+    public interface IAdderSubtractor : IBitWidthDescriber
     {
         IInputEndpointCollection<IInputEndpoint> Number1Inputs { get; }
         IInputEndpointCollection<IInputEndpoint> Number2Inputs { get; }

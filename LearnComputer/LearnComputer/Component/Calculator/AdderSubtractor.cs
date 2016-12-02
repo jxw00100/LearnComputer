@@ -1,11 +1,14 @@
-﻿using LearnComputer.CircuitInfrustructure;
+﻿using System;
+using LearnComputer.CircuitInfrustructure;
 
 namespace LearnComputer.Component
 {
-    public class AdderSubtractor8Bits : IAdderSubtractor8Bits
+    public class AdderSubtractor<TAdder, TComplementor> : IAdderSubtractor 
+        where TAdder : IAdderMultiBits, new() 
+        where TComplementor: IComplementor, new()
     {
-        private Complementor8Bits _cplmtor;
-        private Adder8Bits _adder;
+        private IComplementor _cplmtor;
+        private IAdderMultiBits _adder;
         private XORGate _xorGate;
         private CrossNexus _subNexus;
 
@@ -15,7 +18,7 @@ namespace LearnComputer.Component
         public IOutputEndpointCollection<IOutputEndpoint> ResultOutputs { get; private set; }
         public IOutputEndpoint OverflowUnderflow { get; private set; }
 
-        public AdderSubtractor8Bits()
+        public AdderSubtractor()
         {
             InitBasicElements();
 
@@ -28,13 +31,20 @@ namespace LearnComputer.Component
 
         private void InitBasicElements()
         {
-            _cplmtor = new Complementor8Bits();
-            _adder = new Adder8Bits();
+            _cplmtor = new TComplementor();
+            _adder = new TAdder();
+
+            if(_adder.BitWidth != _cplmtor.BitWidth) throw new ArgumentException("Bit width between adder and complementor are not match.");
+
             _xorGate = new XORGate();
             _subNexus = new CrossNexus(null, _cplmtor.Invert, _adder.CarryInput, _xorGate.Input1);
 
             _cplmtor.Outputs.Connect(_adder.Number2Inputs);
             _adder.CarryOutput.ConnectTo(_xorGate.Input2);
+        }
+
+        public Int32 BitWidth {
+            get { return _adder.BitWidth; }
         }
     }
 }

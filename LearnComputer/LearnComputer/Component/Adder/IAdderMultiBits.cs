@@ -2,7 +2,7 @@
 
 namespace LearnComputer.Component
 {
-    public interface IAdderMultiBits
+    public interface IAdderMultiBits : IBitWidthDescriber
     {
         IInputEndpointCollection<IInputEndpoint> Number1Inputs { get; }
         IInputEndpointCollection<IInputEndpoint> Number2Inputs { get; }

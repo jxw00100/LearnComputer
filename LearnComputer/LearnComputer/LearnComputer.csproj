@@ -43,6 +43,7 @@
     <Compile Include="CircuitInfrustructure\Basic\Endpoint.cs" />
     <Compile Include="CircuitInfrustructure\Basic\EndpointCollection.cs" />
     <Compile Include="CircuitInfrustructure\Basic\InputEndpointCollection.cs" />
+    <Compile Include="CircuitInfrustructure\Basic\Interface\IBitWidthDescriber.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Interface\IEndpoint.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Interface\IEndpointCollection.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Interface\IInputEndpoint.cs" />
@@ -62,9 +63,11 @@
     <Compile Include="CircuitInfrustructure\Basic\ReceiveSignalHanlder.cs" />
     <Compile Include="CircuitInfrustructure\Basic\TShapedNexus.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Wire.cs" />
-    <Compile Include="Component\Calculator\AdderSubtractor8Bits.cs" />
-    <Compile Include="Component\Calculator\IAdderSubtractor8Bits.cs" />
+    <Compile Include="Component\Calculator\AdderSubtractor.cs" />
+    <Compile Include="Component\Calculator\IAdderSubtractor.cs" />
+    <Compile Include="Component\Complementor\Complementor16Bits.cs" />
     <Compile Include="Component\Complementor\Complementor8Bits.cs" />
+    <Compile Include="Component\Complementor\IComplementor.cs" />
     <Compile Include="Component\Decoder\Decoder2To4.cs" />
     <Compile Include="CircuitInfrustructure\Element\Adder\FullAdder.cs" />
     <Compile Include="CircuitInfrustructure\Element\Adder\HalfAdder.cs" />

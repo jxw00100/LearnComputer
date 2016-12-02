@@ -4,7 +4,7 @@ using LearnComputer.CircuitInfrustructure;
 
 namespace LearnComputer.Component
 {
-    public class Complementor8Bits
+    public class Complementor8Bits : IComplementor
     {
         private const Int32 WIDTH = 8;
         private XORGate[] _xorGates;
@@ -32,6 +32,11 @@ namespace LearnComputer.Component
             {
                 _xorGates[i] = new XORGate();
             }
-        }    
+        }
+
+        public Int32 BitWidth
+        {
+            get { return WIDTH; }
+        }
     }
 }

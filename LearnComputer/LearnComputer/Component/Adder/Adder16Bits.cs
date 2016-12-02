@@ -21,15 +21,20 @@ namespace LearnComputer.Component
             _upperAdder = new Adder8Bits();
             _lowerAdder.CarryOutput.ConnectTo(_upperAdder.CarryInput);
 
-            var inputpointsNumber1 = _lowerAdder.Number1Inputs.Concat(_upperAdder.Number1Inputs).Select(i => i as InputEndpoint);
-            var inputpointsNumber2 = _lowerAdder.Number2Inputs.Concat(_upperAdder.Number2Inputs).Select(i => i as InputEndpoint);
-            var outputsSum = _lowerAdder.SumOutputs.Concat(_upperAdder.SumOutputs).Select(i => i as OutputEndpoint);
+            var inputpointsNumber1 = _lowerAdder.Number1Inputs.Concat(_upperAdder.Number1Inputs).Cast<InputEndpoint>();
+            var inputpointsNumber2 = _lowerAdder.Number2Inputs.Concat(_upperAdder.Number2Inputs).Cast<InputEndpoint>();
+            var outputsSum = _lowerAdder.SumOutputs.Concat(_upperAdder.SumOutputs).Cast<OutputEndpoint>();
 
             Number1Inputs = new InputEndpointCollection<InputEndpoint>(WIDTH, inputpointsNumber1);
             Number2Inputs = new InputEndpointCollection<InputEndpoint>(WIDTH, inputpointsNumber2);
             CarryInput = _lowerAdder.CarryInput;
             SumOutputs = new OutputEndpointCollection<OutputEndpoint>(WIDTH, outputsSum);
             CarryOutput = _upperAdder.CarryOutput;
+        }
+
+        public Int32 BitWidth
+        {
+            get { return WIDTH; }
         }
     }
 }

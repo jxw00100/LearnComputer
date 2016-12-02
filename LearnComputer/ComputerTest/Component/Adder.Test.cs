@@ -126,6 +126,12 @@ namespace ComputerTest.Component
         }
 
         [TestMethod]
+        public void MakeSureBitWidthOf8BitsAdder()
+        {
+            Assert.AreEqual(_8BitsAdder.BitWidth, 8);
+        }
+
+        [TestMethod]
         public void Add0To0()
         {
             _8BitsNumber1Switches.Set();
@@ -317,6 +323,12 @@ namespace ComputerTest.Component
         {
             Adder16Bits adder = new Adder16Bits();
             Assert.IsNotNull(adder);
+        }
+
+        [TestMethod]
+        public void MakeSureBitWidthOf16BitsAdder()
+        {
+            Assert.AreEqual(_16BitsAdder.BitWidth, 16);
         }
 
         [TestMethod]

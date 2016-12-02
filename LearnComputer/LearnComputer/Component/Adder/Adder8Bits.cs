@@ -35,5 +35,10 @@ namespace LearnComputer.Component
                 if (i > 0) _fullAdders[i].CarryIn.ConnectTo(_fullAdders[i - 1].CarryOut);
             }
         }
+
+        public Int32 BitWidth
+        {
+            get { return WIDTH; }
+        }
     }
 }
