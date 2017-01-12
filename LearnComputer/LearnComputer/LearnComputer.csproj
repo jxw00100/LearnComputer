@@ -63,6 +63,12 @@
     <Compile Include="CircuitInfrustructure\Basic\ReceiveSignalHanlder.cs" />
     <Compile Include="CircuitInfrustructure\Basic\TShapedNexus.cs" />
     <Compile Include="CircuitInfrustructure\Basic\Wire.cs" />
+    <Compile Include="CircuitInfrustructure\Element\Oscillator\IOscillator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CircuitInfrustructure\Element\Oscillator\Oscillator.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Component\Calculator\AdderSubtractor.cs" />
     <Compile Include="Component\Calculator\IAdderSubtractor.cs" />
     <Compile Include="Component\Complementor\Complementor16Bits.cs" />

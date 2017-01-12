@@ -51,6 +51,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Assist\Extension.cs" />
+    <Compile Include="CircuitInfrustructure\Oscillator.Test.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Component\AdderSubtractor.Test.cs" />
     <Compile Include="Component\Complementor.Test.cs" />
     <Compile Include="Component\Decoder2To4.Test.cs" />
