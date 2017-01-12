@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LearnComputer.CircuitInfrustructure
@@ -10,6 +11,7 @@ namespace LearnComputer.CircuitInfrustructure
         private const string DUPLICATE_ENDPOINTS_EXCETION = "Unable to connect 2 same endpoints.";
         private INeutralEndpointCollection<INeutralEndpoint> _endpoints;
         private Dictionary<INeutralEndpoint, Int32> _inputStatus = new Dictionary<INeutralEndpoint, Int32>();
+        private Mutex mutex = new Mutex();
 
         public Int32 LastSignalStatus
         {
@@ -60,6 +62,7 @@ namespace LearnComputer.CircuitInfrustructure
 
         private void SignalReceivedHandler(IEndpoint sender, Int32 signal)
         {
+            mutex.WaitOne();
             if (LastSignalStatusExcludeThisSender(sender) == 0)
             {
                 Int32 previousSignal = _inputStatus[(INeutralEndpoint)sender.ConnectedPoint];
@@ -79,6 +82,7 @@ namespace LearnComputer.CircuitInfrustructure
                 }
             }
             _inputStatus[(INeutralEndpoint)sender.ConnectedPoint] = signal;
+            mutex.ReleaseMutex();
         }
 
         private Int32 LastSignalStatusExcludeThisSender(IEndpoint sender)
