@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using ComputerTest.Util;
 using LearnComputer.CircuitInfrustructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -98,16 +100,21 @@ namespace ComputerTest.CircuitInfrustructure
 
             Nexus nexus = new Nexus(6, input, output1, output2, netrual);
 
-            output1.Produce(1);
+            ThreadHelper.ExecuteThenSleepShortly(() => output1.Produce(1));
+            Thread.Sleep(1);
             Assert.AreEqual(inputSignal, 1);
             Assert.AreEqual(netrualSignal, 1);
-            output2.Produce(0);
+
+            ThreadHelper.ExecuteThenSleepShortly(() => output2.Produce(0));
+            Thread.Sleep(1);
             Assert.AreEqual(inputSignal, 1);
             Assert.AreEqual(netrualSignal, 1);
-            output1.Produce(0);
+
+            ThreadHelper.ExecuteThenSleepShortly(() => output1.Produce(0));
             Assert.AreEqual(inputSignal, 0);
             Assert.AreEqual(netrualSignal, 0);
-            netrual.Produce(1);
+
+            ThreadHelper.ExecuteThenSleepShortly(() => netrual.Produce(1));
             Assert.AreEqual(inputSignal, 1);
             Assert.AreEqual(netrualSignal, 0);
         }
@@ -127,10 +134,12 @@ namespace ComputerTest.CircuitInfrustructure
             Nexus nexus = new Nexus(6, input1, output, netrual);
 
             output.Produce(1);
+            Thread.Sleep(1);
             Assert.AreEqual(inputSignal1, 1);
             Assert.AreEqual(inputSignal2, 0);
 
             nexus.ConnectAt(input2, 3);
+            Thread.Sleep(1);
             Assert.AreEqual(inputSignal1, 1);
             Assert.AreEqual(inputSignal2, 1);
         }
@@ -146,13 +155,13 @@ namespace ComputerTest.CircuitInfrustructure
 
             Nexus nexus = new Nexus(3, input, output1, output2);
 
-            output1.Produce(1);
+            ThreadHelper.ExecuteThenSleepShortly(() => output1.Produce(1));
             Assert.AreEqual(inputSignal, 1);
-            output1.Produce(0);
+            ThreadHelper.ExecuteThenSleepShortly(() => output1.Produce(0));
             Assert.AreEqual(inputSignal, 0);
-            output1.Produce(1);
+            ThreadHelper.ExecuteThenSleepShortly(() => output1.Produce(1));
             Assert.AreEqual(inputSignal, 1);
-            output1.Produce(0);
+            ThreadHelper.ExecuteThenSleepShortly(() => output1.Produce(0));
             Assert.AreEqual(inputSignal, 0);
         }
 
@@ -168,13 +177,13 @@ namespace ComputerTest.CircuitInfrustructure
 
             Nexus nexus = new Nexus(3, input, output1, output2);
 
-            output1.Produce(1);
+            ThreadHelper.ExecuteThenSleepShortly(() => output1.Produce(1));
             Assert.AreEqual(inputSignal, 1);
-            output1.Produce(0);
+            ThreadHelper.ExecuteThenSleepShortly(() => output1.Produce(0));
             Assert.AreEqual(inputSignal, 1);
-            output1.Produce(1);
+            ThreadHelper.ExecuteThenSleepShortly(() => output1.Produce(1));
             Assert.AreEqual(inputSignal, 1);
-            output1.Produce(1);
+            ThreadHelper.ExecuteThenSleepShortly(() => output1.Produce(0));
             Assert.AreEqual(inputSignal, 1);
         }
 
@@ -189,30 +198,31 @@ namespace ComputerTest.CircuitInfrustructure
             input1.Receive += (sender, signal) => { inputSignal2 = signal; };
 
             IOutputEndpoint output = new OutputEndpoint();
-            output.Produce(1);
+            ThreadHelper.ExecuteThenSleepShortly(()=> output.Produce(1));
 
-            Nexus nexus = new Nexus(3, output, input1, input2);
+            Nexus nexus;
+            ThreadHelper.ExecuteThenSleepShortly(() => nexus = new Nexus(3, output, input1, input2));
 
             Assert.AreEqual(inputSignal1, 1);
             Assert.AreEqual(inputSignal2, 1);
 
-            output.Produce(0);
+            ThreadHelper.ExecuteThenSleepShortly(() => output.Produce(0));
             Assert.AreEqual(inputSignal1, 0);
             Assert.AreEqual(inputSignal2, 0);
 
-            output.Produce(0);
+            ThreadHelper.ExecuteThenSleepShortly(() => output.Produce(0));
             Assert.AreEqual(inputSignal1, 0);
             Assert.AreEqual(inputSignal2, 0);
 
-            output.Produce(1);
+            ThreadHelper.ExecuteThenSleepShortly(() => output.Produce(1));
             Assert.AreEqual(inputSignal1, 1);
             Assert.AreEqual(inputSignal2, 1);
 
-            output.Produce(1);
+            ThreadHelper.ExecuteThenSleepShortly(() => output.Produce(1));
             Assert.AreEqual(inputSignal1, 1);
             Assert.AreEqual(inputSignal2, 1);
 
-            output.Produce(0);
+            ThreadHelper.ExecuteThenSleepShortly(() => output.Produce(0));
             Assert.AreEqual(inputSignal1, 0);
             Assert.AreEqual(inputSignal2, 0);
         }

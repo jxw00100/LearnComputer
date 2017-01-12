@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LearnComputer.CircuitInfrustructure
 {
@@ -68,7 +69,11 @@ namespace LearnComputer.CircuitInfrustructure
                     {
                         if (!Object.ReferenceEquals(sender, endpoint.ConnectedPoint))
                         {
-                            endpoint.Produce(signal);
+                            new Task((ep) =>
+                            {
+                                var endpt = (IOutputEndpoint) ep;
+                                if(endpt != null) endpt.Produce(signal);
+                            }, endpoint).Start();
                         }
                     }
                 }

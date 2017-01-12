@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using ComputerTest.Assist;
+using ComputerTest.Util;
 using LearnComputer.CircuitInfrustructure;
 using LearnComputer.Component;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -142,177 +143,177 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Add1To0()
         {
-            _8BitsNumber1Switches.Set(true);
-            _8BitsNumber2Switches.Set();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set());
             Assert8BitsResultEquals("1");
         }
 
         [TestMethod]
         public void Add0To1()
         {
-            _8BitsNumber1Switches.Set();
-            _8BitsNumber2Switches.Set(true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set());
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true));
             Assert8BitsResultEquals("1");
         }
 
         [TestMethod]
         public void Add1To1()
         {
-            _8BitsNumber1Switches.Set(true);
-            _8BitsNumber2Switches.Set(true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true));
             Assert8BitsResultEquals("10");
         }
 
         [TestMethod]
         public void Add0To0WithCarryIn()
         {
-            _8BitsNumber1Switches.Set();
-            _8BitsNumber2Switches.Set();
-            _carryInPowerFor8Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set());
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set());
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor8Bits.On());
             Assert8BitsResultEquals("1");
         }
 
         [TestMethod]
         public void Add1To0WithCarryIn()
         {
-            _8BitsNumber1Switches.Set(true);
-            _8BitsNumber2Switches.Set();
-            _carryInPowerFor8Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set());
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor8Bits.On());
             Assert8BitsResultEquals("10");
         }
 
         [TestMethod]
         public void Add0To1WithCarryIn()
         {
-            _8BitsNumber1Switches.Set();
-            _8BitsNumber2Switches.Set(true);
-            _carryInPowerFor8Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set());
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor8Bits.On());
             Assert8BitsResultEquals("10");
         }
 
         [TestMethod]
         public void Add1To1WithCarryIn()
         {
-            _8BitsNumber1Switches.Set(true);
-            _8BitsNumber2Switches.Set(true);
-            _carryInPowerFor8Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor8Bits.On());
             Assert8BitsResultEquals("11");
         }
 
         [TestMethod]
         public void Add11To00()
         {
-            _8BitsNumber1Switches.Set(true, true);
-            _8BitsNumber2Switches.Set(false, false);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(false, false));
             Assert8BitsResultEquals("11");
         }
 
         [TestMethod]
         public void Add00To11()
         {
-            _8BitsNumber1Switches.Set(false, false);
-            _8BitsNumber2Switches.Set(true, true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(false, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true, true));
             Assert8BitsResultEquals("11");
         }
 
         [TestMethod]
         public void Add00110101To01001001()
         {
-            _8BitsNumber1Switches.Set(true, false, true, false, true, true, false, false);
-            _8BitsNumber2Switches.Set(true, false, false, true, false, false, true, false);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true, false, true, false, true, true, false, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true, false, false, true, false, false, true, false));
             Assert8BitsResultEquals("01111110");
         }
 
         [TestMethod]
         public void Add00011101To00001011()
         {
-            _8BitsNumber1Switches.Set(true, false, true, true, true, false, false, false);
-            _8BitsNumber2Switches.Set(true, true, false, true, false, false, false, false);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true, false, true, true, true, false, false, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true, true, false, true, false, false, false, false));
             Assert8BitsResultEquals("00101000");
         }
 
         [TestMethod]
         public void Add10000000To10000000()
         {
-            _8BitsNumber1Switches.Set(false, false, false, false, false, false, false, true);
-            _8BitsNumber2Switches.Set(false, false, false, false, false, false, false, true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(false, false, false, false, false, false, false, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(false, false, false, false, false, false, false, true));
             Assert8BitsResultEquals("100000000");
         }
 
         [TestMethod]
         public void Add11111111To00000000WithCarryIn()
         {
-            _8BitsNumber1Switches.Set(true, true, true, true, true, true, true, true);
-            _8BitsNumber2Switches.Set(false, false, false, false, false, false, false, false);
-            _carryInPowerFor8Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true, true, true, true, true, true, true, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(false, false, false, false, false, false, false, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor8Bits.On());
             Assert8BitsResultEquals("100000000");
         }
 
         [TestMethod]
         public void Add00000000To11111111WithCarryIn()
         {
-            _8BitsNumber1Switches.Set(false, false, false, false, false, false, false, false);
-            _8BitsNumber2Switches.Set(true, true, true, true, true, true, true, true);
-            _carryInPowerFor8Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(false, false, false, false, false, false, false, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true, true, true, true, true, true, true, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor8Bits.On());
             Assert8BitsResultEquals("100000000");
         }
 
         [TestMethod]
         public void Add10101010To01010101()
         {
-            _8BitsNumber1Switches.Set(true, false, true, false, true, false, true, false);
-            _8BitsNumber2Switches.Set(false, true, false, true, false, true, false, true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true, false, true, false, true, false, true, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(false, true, false, true, false, true, false, true));
             Assert8BitsResultEquals("11111111");
         }
 
         [TestMethod]
         public void Add01010101To10101010()
         {
-            _8BitsNumber1Switches.Set(false, true, false, true, false, true, false, true);
-            _8BitsNumber2Switches.Set(true, false, true, false, true, false, true, false);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(false, true, false, true, false, true, false, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true, false, true, false, true, false, true, false));
             Assert8BitsResultEquals("11111111");
         }
 
         [TestMethod]
         public void Add10101010To01010101WithCarryIn()
         {
-            _8BitsNumber1Switches.Set(true, false, true, false, true, false, true, false);
-            _8BitsNumber2Switches.Set(false, true, false, true, false, true, false, true);
-            _carryInPowerFor8Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true, false, true, false, true, false, true, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(false, true, false, true, false, true, false, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor8Bits.On());
             Assert8BitsResultEquals("100000000");
         }
 
         [TestMethod]
         public void Add01010101To10101010WithCarryIn()
         {
-            _8BitsNumber1Switches.Set(false, true, false, true, false, true, false, true);
-            _8BitsNumber2Switches.Set(true, false, true, false, true, false, true, false);
-            _carryInPowerFor8Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(false, true, false, true, false, true, false, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true, false, true, false, true, false, true, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor8Bits.On());
             Assert8BitsResultEquals("100000000");
         }
 
         [TestMethod]
         public void Add10110101To11101110()
         {
-            _8BitsNumber1Switches.Set(true, false, true, false, true, true, false, true);
-            _8BitsNumber2Switches.Set(false, true, true, true, false, true, true, true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true, false, true, false, true, true, false, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(false, true, true, true, false, true, true, true));
             Assert8BitsResultEquals("110100011");
         }
 
         [TestMethod]
         public void Add11111111To11111111()
         {
-            _8BitsNumber1Switches.Set(true, true, true, true, true, true, true, true);
-            _8BitsNumber2Switches.Set(true, true, true, true, true, true, true, true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true, true, true, true, true, true, true, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true, true, true, true, true, true, true, true));
             Assert8BitsResultEquals("111111110");
         }
 
         [TestMethod]
         public void Add11111111To11111111WithCarry()
         {
-            _8BitsNumber1Switches.Set(true, true, true, true, true, true, true, true);
-            _8BitsNumber2Switches.Set(true, true, true, true, true, true, true, true);
-            _carryInPowerFor8Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true, true, true, true, true, true, true, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true, true, true, true, true, true, true, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor8Bits.On());
             Assert8BitsResultEquals("111111111");
         }
         #endregion
@@ -342,172 +343,172 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Add1To0_16Bits()
         {
-            _16BitsNumber1Switches.Set(true);
-            _16BitsNumber2Switches.Set();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set());
             Assert16BitsResultEquals("1");
         }
 
         [TestMethod]
         public void Add0To1_16Bits()
         {
-            _16BitsNumber1Switches.Set();
-            _16BitsNumber2Switches.Set(true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set());
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true));
             Assert16BitsResultEquals("1");
         }
 
         [TestMethod]
         public void Add1To1_16Bits()
         {
-            _16BitsNumber1Switches.Set(true);
-            _16BitsNumber2Switches.Set(true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true));
             Assert16BitsResultEquals("10");
         }
 
         [TestMethod]
         public void Add0To0WithCarryIn_16Bits()
         {
-            _16BitsNumber1Switches.Set();
-            _16BitsNumber2Switches.Set();
-            _carryInPowerFor16Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set());
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set());
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor16Bits.On());
             Assert16BitsResultEquals("1");
         }
 
         [TestMethod]
         public void Add1To0WithCarryIn_16Bits()
         {
-            _16BitsNumber1Switches.Set(true);
-            _16BitsNumber2Switches.Set();
-            _carryInPowerFor16Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set());
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor16Bits.On());
             Assert16BitsResultEquals("10");
         }
 
         [TestMethod]
         public void Add0To1WithCarryIn_16Bits()
         {
-            _16BitsNumber1Switches.Set();
-            _16BitsNumber2Switches.Set(true);
-            _carryInPowerFor16Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set());
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor16Bits.On());
             Assert16BitsResultEquals("10");
         }
 
         [TestMethod]
         public void Add1To1WithCarryIn_16Bits()
         {
-            _16BitsNumber1Switches.Set(true);
-            _16BitsNumber2Switches.Set(true);
-            _carryInPowerFor16Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor16Bits.On());
             Assert16BitsResultEquals("11");
         }
 
         [TestMethod]
         public void Add10000000To10000000_16Bits()
         {
-            _16BitsNumber1Switches.Set(false, false, false, false, false, false, false, true);
-            _16BitsNumber2Switches.Set(false, false, false, false, false, false, false, true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(false, false, false, false, false, false, false, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(false, false, false, false, false, false, false, true));
             Assert16BitsResultEquals("100000000");
         }
 
         [TestMethod]
         public void Add11111111To00000000WithCarryIn_16Bits()
         {
-            _16BitsNumber1Switches.Set(true, true, true, true, true, true, true, true);
-            _16BitsNumber2Switches.Set(false, false, false, false, false, false, false, false);
-            _carryInPowerFor16Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true, true, true, true, true, true, true, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(false, false, false, false, false, false, false, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor16Bits.On());
             Assert16BitsResultEquals("100000000");
         }
 
         [TestMethod]
         public void Add00000000To11111111WithCarryIn_16Bits()
         {
-            _16BitsNumber1Switches.Set(false, false, false, false, false, false, false, false);
-            _16BitsNumber2Switches.Set(true, true, true, true, true, true, true, true);
-            _carryInPowerFor16Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(false, false, false, false, false, false, false, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true, true, true, true, true, true, true, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor16Bits.On());
             Assert16BitsResultEquals("100000000");
         }
 
         [TestMethod]
         public void Add1000000000000000To1000000000000000_16Bits()
         {
-            _16BitsNumber1Switches.Set(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true);
-            _16BitsNumber2Switches.Set(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true));
             Assert16BitsResultEquals("10000000000000000");
         }
 
         [TestMethod]
         public void Add1111111111111111To0000000000000000WithCarryIn_16Bits()
         {
-            _16BitsNumber1Switches.Set(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
-            _16BitsNumber2Switches.Set(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
-            _carryInPowerFor16Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor16Bits.On());
             Assert16BitsResultEquals("10000000000000000");
         }
 
         [TestMethod]
         public void Add0000000000000000To1111111111111111WithCarryIn_16Bits()
         {
-            _16BitsNumber1Switches.Set(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
-            _16BitsNumber2Switches.Set(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
-            _carryInPowerFor16Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor16Bits.On());
             Assert16BitsResultEquals("10000000000000000");
         }
 
         [TestMethod]
         public void Add1010101010101010To0101010101010101_16Bits()
         {
-            _16BitsNumber1Switches.Set(true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false);
-            _16BitsNumber2Switches.Set(false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true));
             Assert16BitsResultEquals("1111111111111111");
         }
 
         [TestMethod]
         public void Add0101010101010101To1010101010101010_16Bits()
         {
-            _16BitsNumber1Switches.Set(false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true);
-            _16BitsNumber2Switches.Set(true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false));
             Assert16BitsResultEquals("1111111111111111");
         }
 
         [TestMethod]
         public void Add10101010To01010101WithCarryIn_16Bits()
         {
-            _16BitsNumber1Switches.Set(true, false, true, false, true, false, true, false);
-            _16BitsNumber2Switches.Set(false, true, false, true, false, true, false, true);
-            _carryInPowerFor16Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true, false, true, false, true, false, true, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(false, true, false, true, false, true, false, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor16Bits.On());
             Assert16BitsResultEquals("100000000");
         }
 
         [TestMethod]
         public void Add01010101To10101010WithCarryIn_16Bits()
         {
-            _16BitsNumber1Switches.Set(false, true, false, true, false, true, false, true);
-            _16BitsNumber2Switches.Set(true, false, true, false, true, false, true, false);
-            _carryInPowerFor16Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(false, true, false, true, false, true, false, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true, false, true, false, true, false, true, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor16Bits.On());
             Assert16BitsResultEquals("100000000");
         }
 
         [TestMethod]
         public void Add1010101010101010To0101010101010101WithCarryIn_16Bits()
         {
-            _16BitsNumber1Switches.Set(true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false);
-            _16BitsNumber2Switches.Set(false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true);
-            _carryInPowerFor16Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor16Bits.On());
             Assert16BitsResultEquals("10000000000000000");
         }
 
         [TestMethod]
         public void Add0101010101010101To1010101010101010WithCarryIn_16Bits()
         {
-            _16BitsNumber1Switches.Set(false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true);
-            _16BitsNumber2Switches.Set(true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false);
-            _carryInPowerFor16Bits.On();
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_carryInPowerFor16Bits.On());
             Assert16BitsResultEquals("10000000000000000");
         }
 
         [TestMethod]
         public void Add1101010101010111To1011101011100010_16Bits()
         {
-            _16BitsNumber1Switches.Set(true, true, true, false, true, false, true, false, true, false, true, false, true, false, true, true);
-            _16BitsNumber2Switches.Set(false, true, false, false, false, true, true, true, false, true, false, true, true, true, false, true);
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true, true, true, false, true, false, true, false, true, false, true, false, true, false, true, true));
+            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(false, true, false, false, false, true, true, true, false, true, false, true, true, true, false, true));
             Assert16BitsResultEquals("11001000000111001");
         }
         #endregion

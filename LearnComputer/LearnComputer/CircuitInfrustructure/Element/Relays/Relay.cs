@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace LearnComputer.CircuitInfrustructure
 {
@@ -29,8 +30,26 @@ namespace LearnComputer.CircuitInfrustructure
 
         private void OnReceive(IEndpoint sender, Int32 signal)
         {
-            if (_initialSendBit == 0 && _deplayMilliseconds > 0) Thread.Sleep(_deplayMilliseconds);
+            if (_initialSendBit == 0 && _deplayMilliseconds > 0)
+            {
+                Thread thread = new Thread(DoDelay);
+                thread.Start();
+                thread.Join();
+            }
+            else
+            {
+                DoProduceSignal();
+            }
+        }
 
+        private void DoDelay()
+        {
+            Thread.Sleep(TimeSpan.FromMilliseconds(_deplayMilliseconds));
+            DoProduceSignal();
+        }
+
+        private void DoProduceSignal()
+        {
             var inputSignal = Input.LastReceivedSignal;
             var contactInputSignal = GetContactInputSignal();
             Int32 outSignal = (_invertBit ^ inputSignal) & contactInputSignal;

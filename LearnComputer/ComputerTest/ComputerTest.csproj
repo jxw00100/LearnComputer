@@ -66,6 +66,7 @@
     <Compile Include="CircuitInfrustructure\Wire.Test.cs" />
     <Compile Include="Component\Adder.Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\ThreadHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LearnComputer\LearnComputer.csproj">

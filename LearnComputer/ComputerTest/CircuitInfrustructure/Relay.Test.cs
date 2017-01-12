@@ -151,16 +151,25 @@ namespace ComputerTest.CircuitInfrustructure
             Delayer delayer = new Delayer(delayMilliseconds);
             InputEndpoint input = new InputEndpoint();
             Stopwatch timer = new Stopwatch();
-            input.Receive += (s, sg) => { if (sg == 1) timer.Stop(); };
-
+            
             delayer.Input.ConnectTo(power.Output);
             delayer.Output.ConnectTo(input);
 
-            timer.Start();
+            input.Receive += (s, sg) =>
+            {
+                if (sg == 1)
+                {
+                    timer.Stop();
+                    var deltaMilliseconds = Math.Abs(timer.ElapsedMilliseconds - delayMilliseconds);
+                    Assert.IsTrue(deltaMilliseconds <= 1);
+                }
+            };
+            delayer.Input.Receive += (s, sg) =>
+            {
+                timer.Start();
+            };
+            
             power.On();
-
-            var deltaMilliseconds = Math.Abs(timer.ElapsedMilliseconds - delayMilliseconds);
-            Assert.IsTrue(deltaMilliseconds <= 1);
         }
 
         [TestMethod]
@@ -171,16 +180,25 @@ namespace ComputerTest.CircuitInfrustructure
             Delayer delayer = new Delayer(delayMilliseconds);
             IInputEndpoint input = new InputEndpoint();
             Stopwatch timer = new Stopwatch();
-            input.Receive += (s, sg) => { if (sg == 1) timer.Stop(); };
 
             delayer.Input.ConnectTo(power.Output);
             delayer.Output.ConnectTo(input);
 
-            timer.Start();
-            power.On();
+            input.Receive += (s, sg) =>
+            {
+                if (sg == 1)
+                {
+                    timer.Stop();
+                    var deltaMilliseconds = Math.Abs(timer.ElapsedMilliseconds - delayMilliseconds);
+                    Assert.IsTrue(deltaMilliseconds <= 1);
+                }
+            };
+            delayer.Input.Receive += (s, sg) =>
+            {
+                timer.Start();
+            };
 
-            var deltaMilliseconds = Math.Abs(timer.ElapsedMilliseconds - delayMilliseconds);
-            Assert.IsTrue(deltaMilliseconds <= 1);
+            power.On();
         }
 
         [TestMethod]
