@@ -94,7 +94,13 @@
     <Compile Include="Component\Adder\Adder16Bits.cs" />
     <Compile Include="Component\Adder\Adder8Bits.cs" />
     <Compile Include="Component\Adder\IAdderMultiBits.cs" />
+    <Compile Include="Component\FlipFlop\DTypeFlipFlopLevelTriggered.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Component\FlipFlop\FlipFlop.cs" />
+    <Compile Include="Component\FlipFlop\IDTypeFlipFlop.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Component\FlipFlop\RSFlipFlop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
