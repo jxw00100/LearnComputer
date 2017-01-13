@@ -95,6 +95,7 @@
     <Compile Include="Component\Adder\Adder8Bits.cs" />
     <Compile Include="Component\Adder\IAdderMultiBits.cs" />
     <Compile Include="Component\FlipFlop\FlipFlop.cs" />
+    <Compile Include="Component\FlipFlop\RSFlipFlop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
