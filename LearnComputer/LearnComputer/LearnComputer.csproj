@@ -94,11 +94,10 @@
     <Compile Include="Component\Adder\Adder16Bits.cs" />
     <Compile Include="Component\Adder\Adder8Bits.cs" />
     <Compile Include="Component\Adder\IAdderMultiBits.cs" />
+    <Compile Include="Component\FlipFlop\FlipFlop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Component\FlipFlop\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

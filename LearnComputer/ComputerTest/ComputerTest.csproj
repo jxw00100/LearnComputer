@@ -68,6 +68,7 @@
     <Compile Include="CircuitInfrustructure\Switches.Test.cs" />
     <Compile Include="CircuitInfrustructure\Wire.Test.cs" />
     <Compile Include="Component\Adder.Test.cs" />
+    <Compile Include="Component\FlipFlop.Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ThreadHelper.cs" />
   </ItemGroup>
