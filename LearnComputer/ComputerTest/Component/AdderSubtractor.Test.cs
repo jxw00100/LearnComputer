@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using ComputerTest.Assist;
-using ComputerTest.Util;
 using LearnComputer.CircuitInfrustructure;
 using LearnComputer.Component;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -140,8 +139,8 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Add1To0()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set());
+            _8BitsNumber1Switches.Set(true);
+            _8BitsNumber2Switches.Set();
 
             Assert8BitsResultEquals("1");
             Assert.IsFalse(_overflowUnderflowLight8Bits.Lighting);
@@ -150,8 +149,8 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Add0To1()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true));
+            _8BitsNumber1Switches.Set();
+            _8BitsNumber2Switches.Set(true);
 
             Assert8BitsResultEquals("1");
             Assert.IsFalse(_overflowUnderflowLight8Bits.Lighting);
@@ -160,8 +159,8 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Add1To1()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true));
+            _8BitsNumber1Switches.Set(true);
+            _8BitsNumber2Switches.Set(true);
 
             Assert8BitsResultEquals("10");
             Assert.IsFalse(_overflowUnderflowLight8Bits.Lighting);
@@ -180,9 +179,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub1By0()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub8Bits.On());
+            _8BitsNumber1Switches.Set(true);
+            _8BitsNumber2Switches.Set();
+            _turnSub8Bits.On();
 
             Assert8BitsResultEquals("1");
             Assert.IsFalse(_overflowUnderflowLight8Bits.Lighting);
@@ -191,9 +190,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub0By1()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub8Bits.On());
+            _8BitsNumber1Switches.Set();
+            _8BitsNumber2Switches.Set(true);
+            _turnSub8Bits.On();
 
             Assert8BitsResultEquals("11111111"); //means -1
             Assert.IsTrue(_overflowUnderflowLight8Bits.Lighting);
@@ -202,9 +201,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub1By1()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub8Bits.On());
+            _8BitsNumber1Switches.Set(true);
+            _8BitsNumber2Switches.Set(true);
+            _turnSub8Bits.On();
 
             Assert8BitsResultEquals("0");
             Assert.IsFalse(_overflowUnderflowLight8Bits.Lighting);
@@ -213,8 +212,8 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Add10000000To10000000()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(false, false, false, false, false, false, false, true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(false, false, false, false, false, false, false, true));
+            _8BitsNumber1Switches.Set(false, false, false, false, false, false, false, true);
+            _8BitsNumber2Switches.Set(false, false, false, false, false, false, false, true);
             Assert8BitsResultEquals("00000000");
             Assert.IsTrue(_overflowUnderflowLight8Bits.Lighting); //means 100000000
         }
@@ -222,9 +221,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub10101010By01010101()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(false, true, false, true, false, true, false, true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true, false, true, false, true, false, true, false));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub8Bits.On());
+            _8BitsNumber1Switches.Set(false, true, false, true, false, true, false, true);
+            _8BitsNumber2Switches.Set(true, false, true, false, true, false, true, false);
+            _turnSub8Bits.On();
 
             Assert8BitsResultEquals("01010101");
             Assert.IsFalse(_overflowUnderflowLight8Bits.Lighting);
@@ -233,9 +232,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub01010101By10101010()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true, false, true, false, true, false, true, false));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(false, true, false, true, false, true, false, true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub8Bits.On());
+            _8BitsNumber1Switches.Set(true, false, true, false, true, false, true, false);
+            _8BitsNumber2Switches.Set(false, true, false, true, false, true, false, true);
+            _turnSub8Bits.On();
 
             Assert8BitsResultEquals("10101011");  //means -01010101
             Assert.IsTrue(_overflowUnderflowLight8Bits.Lighting);
@@ -244,9 +243,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub01011011By00010100()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(true, true, false, true, true, false, true, false));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(false, false, true, false, true, false, false, false));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub8Bits.On());
+            _8BitsNumber1Switches.Set(true, true, false, true, true, false, true, false);
+            _8BitsNumber2Switches.Set(false, false, true, false, true, false, false, false);
+            _turnSub8Bits.On();
 
             Assert8BitsResultEquals("01000111");
             Assert.IsFalse(_overflowUnderflowLight8Bits.Lighting);
@@ -255,9 +254,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub00010100By01011011()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber1Switches.Set(false, false, true, false, true, false, false, false));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_8BitsNumber2Switches.Set(true, true, false, true, true, false, true, false));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub8Bits.On());
+            _8BitsNumber1Switches.Set(false, false, true, false, true, false, false, false);
+            _8BitsNumber2Switches.Set(true, true, false, true, true, false, true, false);
+            _turnSub8Bits.On();
 
             Assert8BitsResultEquals("10111001"); //means -01000111
             Assert.IsTrue(_overflowUnderflowLight8Bits.Lighting);
@@ -286,8 +285,8 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Add1To0_16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set());
+            _16BitsNumber1Switches.Set(true);
+            _16BitsNumber2Switches.Set();
 
             Assert16BitsResultEquals("1");
             Assert.IsFalse(_overflowUnderflowLight16Bits.Lighting);
@@ -296,8 +295,8 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Add0To1_16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true));
+            _16BitsNumber1Switches.Set();
+            _16BitsNumber2Switches.Set(true);
 
             Assert16BitsResultEquals("1");
             Assert.IsFalse(_overflowUnderflowLight16Bits.Lighting);
@@ -306,8 +305,8 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Add1To1_16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true));
+            _16BitsNumber1Switches.Set(true);
+            _16BitsNumber2Switches.Set(true);
 
             Assert16BitsResultEquals("10");
             Assert.IsFalse(_overflowUnderflowLight16Bits.Lighting);
@@ -316,9 +315,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub0By0_16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub16Bits.On());
+            _16BitsNumber1Switches.Set();
+            _16BitsNumber2Switches.Set();
+            _turnSub16Bits.On();
             Assert16BitsResultEquals("0");
             Assert.IsFalse(_overflowUnderflowLight16Bits.Lighting);
         }
@@ -326,9 +325,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub1By0_16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub16Bits.On());
+            _16BitsNumber1Switches.Set(true);
+            _16BitsNumber2Switches.Set();
+            _turnSub16Bits.On();
 
             Assert16BitsResultEquals("1");
             Assert.IsFalse(_overflowUnderflowLight16Bits.Lighting);
@@ -337,9 +336,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub0By1_16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub16Bits.On());
+            _16BitsNumber1Switches.Set();
+            _16BitsNumber2Switches.Set(true);
+            _turnSub16Bits.On();
 
             Assert16BitsResultEquals("1111111111111111"); //means -1
             Assert.IsTrue(_overflowUnderflowLight16Bits.Lighting);
@@ -348,9 +347,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub1By1_16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set(true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set(true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub16Bits.On());
+            _16BitsNumber1Switches.Set(true);
+            _16BitsNumber2Switches.Set(true);
+            _turnSub16Bits.On();
 
             Assert16BitsResultEquals("0");
             Assert.IsFalse(_overflowUnderflowLight16Bits.Lighting);
@@ -359,8 +358,8 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Add1000000000000000To1000000000000000_16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set("1000000000000000"));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set("1000000000000000"));
+            _16BitsNumber1Switches.Set("1000000000000000");
+            _16BitsNumber2Switches.Set("1000000000000000");
             Assert16BitsResultEquals("0000000000000000");
             Assert.IsTrue(_overflowUnderflowLight16Bits.Lighting); //means 10000000000000000
         }
@@ -368,9 +367,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub1010101010101010By0101010101010101_16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set("1010101010101010"));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set("0101010101010101"));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub16Bits.On());
+            _16BitsNumber1Switches.Set("1010101010101010");
+            _16BitsNumber2Switches.Set("0101010101010101");
+            _turnSub16Bits.On();
 
             Assert16BitsResultEquals("0101010101010101");
             Assert.IsFalse(_overflowUnderflowLight16Bits.Lighting);
@@ -379,9 +378,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub0101010101010101By1010101010101010_16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set("0101010101010101"));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set("1010101010101010"));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub16Bits.On());                        
+            _16BitsNumber1Switches.Set("0101010101010101");
+            _16BitsNumber2Switches.Set("1010101010101010");
+            _turnSub16Bits.On();
 
             Assert16BitsResultEquals("1010101010101011");  //means -0101010101010101
             Assert.IsTrue(_overflowUnderflowLight16Bits.Lighting);
@@ -390,9 +389,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub0101101101011011By0001010011010100_16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set("0101101101011011"));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set("0001010011010100"));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub16Bits.On());
+            _16BitsNumber1Switches.Set("0101101101011011");
+            _16BitsNumber2Switches.Set("0001010011010100");
+            _turnSub16Bits.On();
 
             Assert16BitsResultEquals("0100011010000111");
             Assert.IsFalse(_overflowUnderflowLight16Bits.Lighting);
@@ -401,9 +400,9 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Sub0001010011010100By0101101101011011_16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber1Switches.Set("0001010011010100"));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_16BitsNumber2Switches.Set("0101101101011011"));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_turnSub16Bits.On());
+            _16BitsNumber1Switches.Set("0001010011010100");
+            _16BitsNumber2Switches.Set("0101101101011011");
+            _turnSub16Bits.On();
 
             Assert16BitsResultEquals("1011100101111001"); //means -0100011010000111
             Assert.IsTrue(_overflowUnderflowLight16Bits.Lighting);

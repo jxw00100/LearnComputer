@@ -1,5 +1,4 @@
-﻿using ComputerTest.Util;
-using LearnComputer.CircuitInfrustructure;
+﻿using LearnComputer.CircuitInfrustructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ComputerTest.CircuitInfrustructure
@@ -44,24 +43,24 @@ namespace ComputerTest.CircuitInfrustructure
             NANDGate nandGate = new NANDGate();
             IndicatorLight light = new IndicatorLight();
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>nandGate.Output.ConnectTo(light.Input));
+            nandGate.Output.ConnectTo(light.Input);
             Assert.IsTrue(light.Lighting);
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>nandGate.Input1.ConnectTo(power1.Output));
-            ThreadHelper.ExecuteThenSleepShortly(()=>nandGate.Input2.ConnectTo(power2.Output));
+            nandGate.Input1.ConnectTo(power1.Output);
+            nandGate.Input2.ConnectTo(power2.Output);
             Assert.IsTrue(light.Lighting);
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
+            power1.On();
+            power2.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
+            power1.Off();
+            power2.On();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
+            power1.On();
+            power2.On();
             Assert.IsFalse(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
+            power1.Off();
+            power2.Off();
             Assert.IsTrue(light.Lighting);
         }
 
@@ -73,24 +72,24 @@ namespace ComputerTest.CircuitInfrustructure
             ORGate orGate = new ORGate();
             IndicatorLight light = new IndicatorLight();
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>orGate.Output.ConnectTo(light.Input));
+            orGate.Output.ConnectTo(light.Input);
             Assert.IsFalse(light.Lighting);
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>orGate.Input1.ConnectTo(power1.Output));
-            ThreadHelper.ExecuteThenSleepShortly(()=>orGate.Input2.ConnectTo(power2.Output));
+            orGate.Input1.ConnectTo(power1.Output);
+            orGate.Input2.ConnectTo(power2.Output);
             Assert.IsFalse(light.Lighting);
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
+            power1.On();
+            power2.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
+            power1.Off();
+            power2.On();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
+            power1.On();
+            power2.On();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
+            power1.Off();
+            power2.Off();
             Assert.IsFalse(light.Lighting);
         }
 
@@ -102,24 +101,24 @@ namespace ComputerTest.CircuitInfrustructure
             NORGate norGate = new NORGate();
             IndicatorLight light = new IndicatorLight();
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>norGate.Output.ConnectTo(light.Input));
+            norGate.Output.ConnectTo(light.Input);
             Assert.IsTrue(light.Lighting);
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>norGate.Input1.ConnectTo(power1.Output));
-            ThreadHelper.ExecuteThenSleepShortly(()=>norGate.Input2.ConnectTo(power2.Output));
+            norGate.Input1.ConnectTo(power1.Output);
+            norGate.Input2.ConnectTo(power2.Output);
             Assert.IsTrue(light.Lighting);
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
+            power1.On();
+            power2.Off();
             Assert.IsFalse(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
+            power1.Off();
+            power2.On();
             Assert.IsFalse(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
+            power1.On();
+            power2.On();
             Assert.IsFalse(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
+            power1.Off();
+            power2.Off();
             Assert.IsTrue(light.Lighting);
         }
         
@@ -131,24 +130,24 @@ namespace ComputerTest.CircuitInfrustructure
             XORGate xorGate = new XORGate();
             IndicatorLight light = new IndicatorLight();
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>xorGate.Output.ConnectTo(light.Input));
+            xorGate.Output.ConnectTo(light.Input);
             Assert.IsFalse(light.Lighting);
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>xorGate.Input1.ConnectTo(power1.Output));
-            ThreadHelper.ExecuteThenSleepShortly(()=>xorGate.Input2.ConnectTo(power2.Output));
+            xorGate.Input1.ConnectTo(power1.Output);
+            xorGate.Input2.ConnectTo(power2.Output);
             Assert.IsFalse(light.Lighting);
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
+            power1.On();
+            power2.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
+            power1.Off();
+            power2.On();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
+            power1.On();
+            power2.On();
             Assert.IsFalse(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
+            power1.Off();
+            power2.Off();
             Assert.IsFalse(light.Lighting);
         }
 
@@ -160,24 +159,24 @@ namespace ComputerTest.CircuitInfrustructure
             XNORGate xnorGate = new XNORGate();
             IndicatorLight light = new IndicatorLight();
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>xnorGate.Output.ConnectTo(light.Input));
+            xnorGate.Output.ConnectTo(light.Input);
             Assert.IsTrue(light.Lighting);
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>xnorGate.Input1.ConnectTo(power1.Output));
-            ThreadHelper.ExecuteThenSleepShortly(()=>xnorGate.Input2.ConnectTo(power2.Output));
+            xnorGate.Input1.ConnectTo(power1.Output);
+            xnorGate.Input2.ConnectTo(power2.Output);
             Assert.IsTrue(light.Lighting);
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
+            power1.On();
+            power2.Off();
             Assert.IsFalse(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
+            power1.Off();
+            power2.On();
             Assert.IsFalse(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
+            power1.On();
+            power2.On();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
+            power1.Off();
+            power2.Off();
             Assert.IsTrue(light.Lighting);
         }
 
@@ -307,105 +306,105 @@ namespace ComputerTest.CircuitInfrustructure
             mtORGate.ConnectInputsWith(power1.Output, power2.Output, power3.Output, power4.Output, power5.Output);
             IndicatorLight light = new IndicatorLight();
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>mtORGate.Output.ConnectTo(light.Input));
+            mtORGate.Output.ConnectTo(light.Input);
             Assert.IsFalse(light.Lighting);
 
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.Off());
+            power1.On();
+            power2.Off();
+            power3.Off();
+            power4.Off();
+            power5.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.Off());
+            power1.On();
+            power2.On();
+            power3.Off();
+            power4.Off();
+            power5.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.Off());
+            power1.On();
+            power2.On();
+            power3.On();
+            power4.Off();
+            power5.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.Off());
+            power1.On();
+            power2.On();
+            power3.On();
+            power4.On();
+            power5.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.On());
+            power1.On();
+            power2.On();
+            power3.On();
+            power4.On();
+            power5.On();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.Off());
+            power1.Off();
+            power2.On();
+            power3.Off();
+            power4.Off();
+            power5.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.Off());
+            power1.Off();
+            power2.On();
+            power3.On();
+            power4.Off();
+            power5.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.Off());
+            power1.Off();
+            power2.On();
+            power3.On();
+            power4.On();
+            power5.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.On());
+            power1.Off();
+            power2.On();
+            power3.On();
+            power4.On();
+            power5.On();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.Off());
+            power1.Off();
+            power2.Off();
+            power3.On();
+            power4.Off();
+            power5.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.Off());
+            power1.Off();
+            power2.Off();
+            power3.On();
+            power4.On();
+            power5.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.On());
+            power1.Off();
+            power2.Off();
+            power3.On();
+            power4.On();
+            power5.On();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.Off());
+            power1.Off();
+            power2.Off();
+            power3.Off();
+            power4.On();
+            power5.Off();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.On());
+            power1.Off();
+            power2.Off();
+            power3.Off();
+            power4.On();
+            power5.On();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.On());
+            power1.Off();
+            power2.Off();
+            power3.Off();
+            power4.Off();
+            power5.On();
             Assert.IsTrue(light.Lighting);
-            ThreadHelper.ExecuteThenSleepShortly(()=>power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power2.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power3.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power4.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>power5.Off());
-            Assert.IsFalse(light.Lighting);      
+            power1.Off();
+            power2.Off();
+            power3.Off();
+            power4.Off();
+            power5.Off();
+            Assert.IsFalse(light.Lighting);
         }
         #endregion
     }

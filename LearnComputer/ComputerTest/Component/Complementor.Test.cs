@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using ComputerTest.Assist;
-using ComputerTest.Util;
 using LearnComputer.CircuitInfrustructure;
 using LearnComputer.Component;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -113,40 +112,40 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Complement00000000()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_switches8.Set());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_invertPwr.On());
+            _switches8.Set();
+            _invertPwr.On();
             _resultLights8.AssertEquals("11111111");
         }
 
         [TestMethod]
         public void Complement11111111()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_switches8.Set(true, true, true, true, true, true, true, true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_invertPwr.On());
+            _switches8.Set(true, true, true, true, true, true, true, true);
+            _invertPwr.On();
             _resultLights8.AssertEquals("00000000");
         }
 
         [TestMethod]
         public void Complement01010101()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_switches8.Set(true, false, true, false, true, false, true, false));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_invertPwr.On());
+            _switches8.Set(true, false, true, false, true, false, true, false);
+            _invertPwr.On();
             _resultLights8.AssertEquals("10101010");
         }
 
         [TestMethod]
         public void Complement10101010()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_switches8.Set(false, true, false, true, false, true, false, true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_invertPwr.On());
+            _switches8.Set(false, true, false, true, false, true, false, true);
+            _invertPwr.On();
             _resultLights8.AssertEquals("01010101");
         }
 
         [TestMethod]
         public void Complement11010111()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_switches8.Set(true, true, true, false, true, false, true, true));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_invertPwr.On());
+            _switches8.Set(true, true, true, false, true, false, true, true);
+            _invertPwr.On();
             _resultLights8.AssertEquals("00101000");
         }
         #endregion
@@ -175,23 +174,23 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Keep1111111111111111_For16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_switches16.Set("1111111111111111"));
+            _switches16.Set("1111111111111111");
             _resultLights16.AssertEquals("1111111111111111");
         }
 
         [TestMethod]
         public void Invert0000000000000000_For16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_switches16.Set());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_invertPwr16.On());
+            _switches16.Set();
+            _invertPwr16.On();
             _resultLights16.AssertEquals("1111111111111111");
         }
 
         [TestMethod]
         public void Invert1111111111111111_For16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_switches16.Set("1111111111111111"));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_invertPwr16.On());
+            _switches16.Set("1111111111111111");
+            _invertPwr16.On();
             _resultLights16.AssertEquals("0000000000000000");
         }
 
@@ -200,16 +199,16 @@ namespace ComputerTest.Component
         [TestMethod]
         public void Invert0101010101010101_For16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_switches16.Set("0101010101010101"));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_invertPwr16.On());
+            _switches16.Set("0101010101010101");
+            _invertPwr16.On();
             _resultLights16.AssertEquals("1010101010101010");
         }
 
         [TestMethod]
         public void Invert1010101010101010_For16Bits()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_switches16.Set("1010101010101010"));
-            ThreadHelper.ExecuteThenSleepShortly(()=>_invertPwr16.On());
+            _switches16.Set("1010101010101010");
+            _invertPwr16.On();
             _resultLights16.AssertEquals("0101010101010101");
         }
         #endregion

@@ -1,5 +1,4 @@
 ﻿using System;
-using ComputerTest.Util;
 using LearnComputer.CircuitInfrustructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -70,8 +69,8 @@ namespace ComputerTest.CircuitInfrustructure
         [TestMethod]
         public void Add0To1()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_power1.Off());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_power2.On());
+            _power1.Off();
+            _power2.On();
 
             Assert.IsTrue(_lightSum.Lighting);
             Assert.IsFalse(_lightCarry.Lighting);
@@ -80,8 +79,8 @@ namespace ComputerTest.CircuitInfrustructure
         [TestMethod]
         public void Add1To0()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_power2.Off());
+            _power1.On();
+            _power2.Off();
 
             Assert.IsTrue(_lightSum.Lighting);
             Assert.IsFalse(_lightCarry.Lighting);
@@ -90,8 +89,8 @@ namespace ComputerTest.CircuitInfrustructure
         [TestMethod]
         public void Add1To1()
         {
-            ThreadHelper.ExecuteThenSleepShortly(()=>_power1.On());
-            ThreadHelper.ExecuteThenSleepShortly(()=>_power2.On());
+            _power1.On();
+            _power2.On();
 
             Assert.IsFalse(_lightSum.Lighting);
             Assert.IsTrue(_lightCarry.Lighting);

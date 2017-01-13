@@ -13,6 +13,8 @@ namespace LearnComputer.CircuitInfrustructure
         private Dictionary<INeutralEndpoint, Int32> _inputStatus = new Dictionary<INeutralEndpoint, Int32>();
         private Mutex mutex = new Mutex();
 
+        public Boolean AsyncDispatch { get; set; } 
+
         public Int32 LastSignalStatus
         {
             get
@@ -72,11 +74,18 @@ namespace LearnComputer.CircuitInfrustructure
                     {
                         if (!Object.ReferenceEquals(sender, endpoint.ConnectedPoint))
                         {
-                            new Task((ep) =>
+                            if (AsyncDispatch)
                             {
-                                var endpt = (IOutputEndpoint) ep;
-                                if(endpt != null) endpt.Produce(signal);
-                            }, endpoint).Start();
+                                ThreadPool.QueueUserWorkItem((ep) =>
+                                {
+                                    var endpt = (IOutputEndpoint) ep;
+                                    if (endpt != null) endpt.Produce(signal);
+                                }, endpoint);
+                            }
+                            else
+                            {
+                                endpoint.Produce(signal);
+                            }
                         }
                     }
                 }
