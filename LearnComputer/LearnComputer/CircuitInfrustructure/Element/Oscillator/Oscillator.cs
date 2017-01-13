@@ -8,7 +8,7 @@ namespace LearnComputer.CircuitInfrustructure
 
         private ANDGate _andGate;
         private Relay _delayInvertor;
-        private TShapedNexus _nexus;
+        private TShapedNexus _asyncNexus;
 
         public IInputEndpoint Start { get; private set; }
         public IOutputEndpoint Output { get; private set; }
@@ -21,34 +21,12 @@ namespace LearnComputer.CircuitInfrustructure
             _interval = interval;
             _andGate = new ANDGate();
             _delayInvertor = new Relay(_interval, true);
-            _nexus = new TShapedNexus(_delayInvertor.Output, _andGate.Input2);
+            _asyncNexus = new TShapedNexus(_delayInvertor.Output, _andGate.Input2) {AsyncDispatch = true};
 
             _andGate.Output.ConnectTo(_delayInvertor.Input);
 
             Start = _andGate.Input1;
-            Output = _nexus.GetEndpointAt(2);
-
-            _andGate.Input2.Receive +=
-                (s, ss) =>
-                {
-                    var sss = ss;
-                };
-
-            _nexus.GetEndpointAt(0).Receive += (s, ss) =>
-            {
-                var sss = ss;
-            };
-
-            _delayInvertor.Input.Receive +=
-            (s, ss) =>
-            {
-                var sss = ss;
-            };
-
-            
-
+            Output = _asyncNexus.GetEndpointAt(2);
         }
-
-
     }
 }
