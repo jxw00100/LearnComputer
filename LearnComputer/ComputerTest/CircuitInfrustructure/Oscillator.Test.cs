@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using ComputerTest.Util;
 using LearnComputer.CircuitInfrustructure;
@@ -9,22 +11,22 @@ namespace ComputerTest.CircuitInfrustructure
     [TestClass]
     public class OscillatorTest
     {
-        private IOscillator _oscillator20Hz;
+        private IOscillator _oscillator10Hz;
         private PowerSupplier _startPower;
         private Object _count = 0;
 
         public OscillatorTest()
         {
-            _oscillator20Hz = new Oscillator(50);
+            _oscillator10Hz = new Oscillator(50);
             _startPower = new PowerSupplier();
 
-            _oscillator20Hz.Start.ConnectTo(_startPower.Output);
+            _oscillator10Hz.Start.ConnectTo(_startPower.Output);
         }
 
         [TestInitialize]
         public void TestInit()
         {
-            _oscillator20Hz.Output.DisconnectEndpoint();
+            _oscillator10Hz.Output.DisconnectEndpoint();
             _startPower.Off();
             _count = 0;
         }
@@ -47,7 +49,7 @@ namespace ComputerTest.CircuitInfrustructure
         }
 
         [TestMethod]
-        public void Create50HzOscillator()
+        public void Create25HzOscillator()
         {
             IOscillator osc = new Oscillator(20);
 
@@ -62,7 +64,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void AbleToOscillate()
         {
             IInputEndpoint input = new InputEndpoint();
-            input.ConnectTo(_oscillator20Hz.Output);
+            input.ConnectTo(_oscillator10Hz.Output);
             input.Receive += (sd, sgn) =>
             {
                 Thread.Sleep(1);
@@ -79,7 +81,7 @@ namespace ComputerTest.CircuitInfrustructure
         public void Oscillate20HzOnTime()
         {
             IInputEndpoint input = new InputEndpoint();
-            input.ConnectTo(_oscillator20Hz.Output);
+            input.ConnectTo(_oscillator10Hz.Output);
             input.Receive += (sd, sgn) =>
             {
                 Thread.Sleep(1);
@@ -108,7 +110,7 @@ namespace ComputerTest.CircuitInfrustructure
         }
 
         [TestMethod]
-        public void Oscillate50HzOnTime()
+        public void Oscillate25HzOnTime()
         {
             IOscillator oscillator = new Oscillator(20);
             PowerSupplier power = new PowerSupplier();
@@ -144,5 +146,36 @@ namespace ComputerTest.CircuitInfrustructure
             Assert.IsTrue((Int32)_count < 5);
         }
 
+        [TestMethod]
+        public void OscillateFloppyExactly()
+        {
+            IInputEndpoint input = new InputEndpoint();
+            IList<Int32> results = new List<Int32>();
+            input.ConnectTo(_oscillator10Hz.Output);
+
+            input.Receive += (sd, sgn) =>
+            {
+                Thread.Sleep(1);
+                if ((Int32)_count >= 5)
+                {
+                    _startPower.Off();
+                }
+                else
+                {
+                    _count = (Int32)_count + 1;
+                    results.Add(sgn);
+                }
+
+            };
+
+            ThreadHelper.ExecuteThenSleepShortly(() => _startPower.On(), 500);
+
+            Assert.AreEqual(results.Count, 5);
+            Assert.AreEqual(results[0], 0);
+            Assert.AreEqual(results[1], 1);
+            Assert.AreEqual(results[2], 0);
+            Assert.AreEqual(results[3], 1);
+            Assert.AreEqual(results[4], 0);
+        }
     }
 }
